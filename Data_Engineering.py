@@ -81,7 +81,7 @@ class DataframeTools:
         """
 
         print("Replacing null values with zero...\n")
-        dfs = dfs.na.fill(0, (head))
+        dfs = dfs.na.fill(0, head)
         return dfs
 
     def translate_col(self, head, dfs, src='no', dest='en'):
@@ -180,7 +180,7 @@ class DataframeTools:
 
         new_dfs = new_dfs.na.replace(numerate, 1, "Discrete_str")
         new_dfs = new_dfs.withColumn("Discrete", new_dfs["Discrete_str"].cast(IntegerType())).drop("Discrete_str")
-        new_dfs = new_dfs.na.fill(0, ("Discrete"))
+        new_dfs = new_dfs.na.fill(0, "Discrete")
 
         return new_dfs
 
@@ -196,6 +196,19 @@ class DataframeTools:
         """
 
         return dfs.withColumn("year", F.year(F.col("datetime")))
+
+    def add_quart_col(self, dfs):
+        """Add column of the quarterly period to dataframe.
+
+        Args:
+          dfs (dataframe): dataframe with datetime
+
+        Returns:
+          dataframe with column for quarterly period.
+
+        """
+
+        return dfs.withColumn("quarter", F.quarter(F.col("datetime")))
 
     def merge_duplicate(self, dfs):
         """Collect up duplicated datetimes with different descriptions, and merge the descriptions together.
@@ -213,12 +226,12 @@ class DataframeTools:
             .map(lambda row: (row[0], [(row[1], row[2], row[3])])) \
             .reduceByKey(lambda x, y: x + y) \
             .map(lambda row: (
-            row[0],  # key i.e. datetime
-            row[1][0][0],  # sum(row[1][0]) / len(row[1][0]),       #value, take the average of the values
-            ','.join([str(e[1]) for e in row[1]]),  # join up the descriptions
-            ','.join([str(e[2]) for e in row[1]])  # join up the grouped descriptions
-        )
-                 )
+                row[0],  # key i.e. datetime
+                row[1][0][0],  # sum(row[1][0]) / len(row[1][0]),       #value, take the average of the values
+                ','.join([str(e[1]) for e in row[1]]),  # join up the descriptions
+                ','.join([str(e[2]) for e in row[1]])  # join up the grouped descriptions
+                )
+             )
 
         schema_red = dfs.schema
         new_dfs = sqlContext.createDataFrame(reduced, schema_red).orderBy("datetime")
@@ -233,6 +246,7 @@ class DataframeTools:
 
           Args:
             dfs (dataframe): dataframe in the format of: datetime|value|...|...
+            period (str): period for averaging over, e.g. day, week, month, year...
 
           Returns:
             dataframe in format of: datetime|value  , where value is the averaged value over the period
@@ -427,7 +441,7 @@ class GroupDataTools(DataframeTools):
 
             if ("overlay" in kwargs.keys()) and ("overlay_dfs" in kwargs.keys()):
                 overlay_dfs_ = self.add_year_col(kwargs["overlay_dfs"])
-                overlay_dfs_years = [overlay_dfs_.where(overlay_dfs_.year == y) for y in years]
+                overlay_dfs_years = [overlay_dfs_.where(overlay_dfs_.year == y) for y in kwargs["plot_yearly"]]
 
                 for year_plot, ax in zip(overlay_dfs_years, axs):
                     self.__overlay_plot(ax, kwargs["overlay"], year_plot)
@@ -435,46 +449,68 @@ class GroupDataTools(DataframeTools):
             fig.tight_layout(pad=0.4, w_pad=0.5, h_pad=3.0)
             display(fig)
 
-    #     if "plot_quarterly" in kwargs.keys():
-    #       ts_df_years_list = [self.add_year_col(df) for df in ts_df_list]
+        if "plot_quarterly" in kwargs.keys():
+            ts_df_y_list = [self.add_year_col(df) for df in ts_df_list]
+            ts_df_yq_list = [self.add_quart_col(df) for df in ts_df_y_list]
 
-    #       # double list: dfs_years[df][year]
-    #       # check if input years list is valid in the dfs column of years
-    #       dfs_years = [[df.where(df.year == y).toPandas() for y in kwargs["plot_yearly"]] for df in ts_df_years_list]
+            # triple list: dfs_years[df][year][quarter]
+            # check if input years list is valid in the dfs column of years
+            dfs_yq = []
+            for df in ts_df_yq_list:
+                dfs_y = []
+                for y in kwargs["plot_yearly"]:
+                    dfs_q = []
+                    for q in range(1, 5):
+                        dfs_q.append(df.where((df.year == y) & (df.quarter == q)).toPandas())
+                    dfs_y.append(dfs_q)
+                dfs_yq.append(dfs_y)
 
-    #       plots = len(kwargs["plot_yearly"])
+            plots = len(kwargs["plot_yearly"])*4
 
-    #       fig, axs = plt.subplots(plots, 1, figsize=(24, 8*plots))
-    #       axs.flatten()
+            fig, axs = plt.subplots(plots, 1, figsize=(24, 8*plots))
+            axs.flatten()
 
-    #       for df, lab in zip(dfs_years, label_list):
-    #         for year_plot, ax, year in zip(df, axs, kwargs["plot_yearly"]):
-    #           ts_pd = year_plot.sort_values(x_head)
+            for dfs_y, lab in zip(dfs_yq, label_list):
+                for dfs_q in dfs_y:
+                    for q_plot, ax, year, quarter in zip(dfs_q, axs, kwargs["plot_yearly"], range(1, 5)):
+                        ts_pd = q_plot.sort_values(x_head)
 
-    #           y = ts_pd[y_head].tolist()
-    #           x = ts_pd[x_head].tolist()
+                        y = ts_pd[y_head].tolist()
+                        x = ts_pd[x_head].tolist()
 
-    #           ax.plot(x, y, "-", label=lab)
-    #           ax.grid(True)
-    #           ax.set_title("{}, {}".format(title, year), fontsize=16)
-    #           ax.legend(loc="best")
-    #           ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y-%m-%d %H:%M"))
-    #           ax.xaxis.set_minor_formatter(mdates.DateFormatter("%Y-%m-%d"))
+                        ax.plot(x, y, "-", label=lab)
+                        ax.grid(True)
+                        ax.set_title("{}, {}, Q{}".format(title, year, quarter), fontsize=16)
+                        ax.legend(loc="best")
+                        ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y-%m-%d %H:%M"))
+                        ax.xaxis.set_minor_formatter(mdates.DateFormatter("%Y-%m-%d"))
 
-    #           ax.set_xlabel(x_head, fontsize=16)
-    #           ax.set_ylabel(y_head, fontsize=16)
+                        ax.set_xlabel(x_head, fontsize=16)
+                        ax.set_ylabel(y_head, fontsize=16)
 
-    #       if ("overlay" in kwargs.keys()) and ("overlay_dfs" in kwargs.keys()):
-    #         overlay_dfs_ = self.add_year_col(kwargs["overlay_dfs"])
-    #         overlay_dfs_years = [overlay_dfs_.where(overlay_dfs_.year == y) for y in years]
+            if ("overlay" in kwargs.keys()) and ("overlay_dfs" in kwargs.keys()):
+                overlay_dfs_ = self.add_year_col(kwargs["overlay_dfs"])
+                overlay_dfs_ = self.add_quart_col(overlay_dfs_)
 
-    #         for year_plot, ax in zip(overlay_dfs_years, axs):
-    #           self.__overlay_plot(ax, kwargs["overlay"], year_plot)
+                overlay_dfs_yq = [[overlay_dfs_.where((overlay_dfs_.year == y) & (overlay_dfs_.quarter == q)) for q in range(1, 5)] for y in kwargs["plot_yearly"]]
 
-    #       fig.tight_layout(pad=0.4, w_pad=0.5, h_pad=3.0)
-    #       display(fig)
+                for year in overlay_dfs_yq:
+                    for q, ax in zip(year, axs):
+                        self.__overlay_plot(ax, kwargs["overlay"], q)
+
+            fig.tight_layout(pad=0.4, w_pad=0.5, h_pad=3.0)
+            display(fig)
 
     def __overlay_plot(self, ax, overlay, overlay_dfs):
+        """Private function to plot descriptive data over linear graphs
+
+        Args:
+            ax (axes): matplotlib axes to plot on
+            overlay (str): header name of overlay column in dataframe
+            overlay_dfs (dataframe): dataframe containing the overlay column
+
+        """
+
         dfs_pd = overlay_dfs.toPandas()
         groups = dfs_pd.groupby(overlay)
 
@@ -522,9 +558,8 @@ class GroupDataTools(DataframeTools):
 
         """
 
-        avg = ts_df.withColumn("avg", weighted_average(ts_df, offsets, weights)).drop(y_head)
+        avg = ts_df.withColumn("avg", self.weighted_average(ts_df, offsets, weights)).drop(y_head)
         avg = avg.select(avg[x_head],
                          avg["avg"].alias(y_head))
 
-        plot_ts(title, y_label, [avg])
-
+        self.plot_ts(title, y_label, [avg])
