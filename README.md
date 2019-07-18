@@ -9,7 +9,7 @@ This serves as the main repository for uploading and version control.
 For background, the main python environment will be Microsoft Azure Notebooks with Spark/Apache Integration.
 
 
-**Version Control Log History:**
+#### Version Control Log History:
 
 Due to company reasons and data privacy control, version controlling approach may change over time. 
 A log below will keep track of these changes.
