@@ -408,7 +408,6 @@ class GroupDataTools(DataframeTools):
             ax.legend(loc="best")
 
             fig.tight_layout(pad=0.4, w_pad=0.5, h_pad=3.0)
-            display(fig)
 
         else:
             ts_df_years_list = [self.add_year_col(df) for df in ts_df_list]
@@ -447,7 +446,6 @@ class GroupDataTools(DataframeTools):
                     self.__overlay_plot(ax, kwargs["overlay"], year_plot)
 
             fig.tight_layout(pad=0.4, w_pad=0.5, h_pad=3.0)
-            display(fig)
 
         if "plot_quarterly" in kwargs.keys():
             ts_df_y_list = [self.add_year_col(df) for df in ts_df_list]
@@ -499,7 +497,8 @@ class GroupDataTools(DataframeTools):
                         self.__overlay_plot(ax, kwargs["overlay"], q)
 
             fig.tight_layout(pad=0.4, w_pad=0.5, h_pad=3.0)
-            display(fig)
+
+        return fig
 
     def __overlay_plot(self, ax, overlay, overlay_dfs):
         """Private function to plot descriptive data over linear graphs
