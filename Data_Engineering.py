@@ -211,11 +211,12 @@ class DataframeTools:
 
         return dfs.withColumn("quarter", F.quarter(F.col("datetime")))
 
-    def merge_duplicate(self, dfs):
+    def merge_duplicate(self, dfs, sqlContext):
         """Collect up duplicated datetimes with different descriptions, and merge the descriptions together.
 
           Args:
             dfs (dataframe): dataframe in the format: datetime|value|description|groupedDescription
+            sqlContext (spark object): required for spark RDD creation
 
           Returns:
             dataframe with merged descriptions
@@ -235,6 +236,7 @@ class DataframeTools:
              )
 
         schema_red = dfs.schema
+
         new_dfs = sqlContext.createDataFrame(reduced, schema_red).orderBy("datetime")
 
         if new_dfs.count() > new_dfs.dropDuplicates(["datetime"]).count():
