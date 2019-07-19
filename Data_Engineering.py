@@ -459,21 +459,21 @@ class GroupDataTools(DataframeTools):
             dfs_yq = []
             for df in ts_df_yq_list:
                 dfs_y = []
-                for y in kwargs["plot_yearly"]:
+                for y in kwargs["plot_quarterly"]:
                     dfs_q = []
                     for q in range(1, 5):
                         dfs_q.append(df.where((df.year == y) & (df.quarter == q)).toPandas())
                     dfs_y.append(dfs_q)
                 dfs_yq.append(dfs_y)
 
-            plots = len(kwargs["plot_yearly"])*4
+            plots = len(kwargs["plot_quarterly"])*4
 
             fig, axs = plt.subplots(plots, 1, figsize=(24, 8*plots))
             axs.flatten()
 
             for dfs_y, lab in zip(dfs_yq, label_list):
                 for dfs_q in dfs_y:
-                    for q_plot, ax, year, quarter in zip(dfs_q, axs, kwargs["plot_yearly"], range(1, 5)):
+                    for q_plot, ax, year, quarter in zip(dfs_q, axs, kwargs["plot_quarterly"], range(1, 5)):
                         ts_pd = q_plot.sort_values(x_head)
 
                         y = ts_pd[y_head].tolist()
