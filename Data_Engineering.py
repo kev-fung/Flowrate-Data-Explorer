@@ -4,6 +4,7 @@ from pyspark.sql import functions as F
 from pyspark.sql.types import LongType, StringType, StructField, StructType, BooleanType, ArrayType, IntegerType, TimestampType, DoubleType
 from pyspark.sql.functions import coalesce, lit, col, lead, lag
 from pyspark.sql.functions import stddev, mean
+from pyspark.sql import SQLContext
 from pyspark.sql.window import Window
 
 from operator import add
