@@ -493,7 +493,8 @@ class GroupDataTools(DataframeTools):
                 overlay_dfs_ = self.add_year_col(kwargs["overlay_dfs"])
                 overlay_dfs_ = self.add_quart_col(overlay_dfs_)
 
-                overlay_dfs_yq = [[overlay_dfs_.where((overlay_dfs_.year == y) & (overlay_dfs_.quarter == q)) for q in range(1, 5)] for y in kwargs["plot_yearly"]]
+                overlay_dfs_yq = [[overlay_dfs_.where((overlay_dfs_.year == y) & (overlay_dfs_.quarter == q)) for q in
+                                   range(1, 5)] for y in kwargs["plot_quarterly"]]
 
                 for year in overlay_dfs_yq:
                     for q, ax in zip(year, axs):
