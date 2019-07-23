@@ -471,23 +471,22 @@ class GroupDataTools(DataframeTools):
             fig, axs = plt.subplots(plots, 1, figsize=(24, 8*plots))
             axs.flatten()
 
-            for dfs_y, lab in zip(dfs_yq, label_list):
-                for dfs_q in dfs_y:
-                    for q_plot, ax, year, quarter in zip(dfs_q, axs, kwargs["plot_quarterly"], range(1, 5)):
-                        ts_pd = q_plot.sort_values(x_head)
+            for dfs_y, lab in zip(range(len(dfs_yq)), label_list):
+                for dfs_q, year in zip(range(len(dfs_yq[0])), kwargs["plot_quarterly"]):
+                    for quarter in range(1, 5):
+                        ts_pd = dfs_yq[dfs_y][dfs_q][quarter - 1].sort_values(x_head)
 
                         y = ts_pd[y_head].tolist()
                         x = ts_pd[x_head].tolist()
 
-                        ax.plot(x, y, "-", label=lab)
-                        ax.grid(True)
-                        ax.set_title("{}, {}, Q{}".format(title, year, quarter), fontsize=16)
-                        ax.legend(loc="best")
-                        ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y-%m-%d %H:%M"))
-                        ax.xaxis.set_minor_formatter(mdates.DateFormatter("%Y-%m-%d"))
+                        axs[(quarter - 1) + (4 * dfs_q)].plot(x, y, "-", label=lab)
+                        axs[(quarter - 1) + (4 * dfs_q)].grid(True)
+                        axs[(quarter - 1) + (4 * dfs_q)].set_title("{}, {}, Q{}".format(title, year, quarter),
+                                                                   fontsize=16)
+                        axs[(quarter - 1) + (4 * dfs_q)].legend(loc="best")
 
-                        ax.set_xlabel(x_head, fontsize=16)
-                        ax.set_ylabel(y_head, fontsize=16)
+                        axs[(quarter - 1) + (4 * dfs_q)].set_xlabel(x_head, fontsize=16)
+                        axs[(quarter - 1) + (4 * dfs_q)].set_ylabel(y_head, fontsize=16)
 
             if ("overlay" in kwargs.keys()) and ("overlay_dfs" in kwargs.keys()):
                 overlay_dfs_ = self.add_year_col(kwargs["overlay_dfs"])
@@ -496,9 +495,10 @@ class GroupDataTools(DataframeTools):
                 overlay_dfs_yq = [[overlay_dfs_.where((overlay_dfs_.year == y) & (overlay_dfs_.quarter == q)) for q in
                                    range(1, 5)] for y in kwargs["plot_quarterly"]]
 
-                for year in overlay_dfs_yq:
-                    for q, ax in zip(year, axs):
-                        self.__overlay_plot(ax, kwargs["overlay"], q)
+                for year in range(len(overlay_dfs_yq)):
+                    for quarter in range(1, 5):
+                        self.__overlay_plot(axs[(quarter - 1) + (4 * year)], kwargs["overlay"],
+                                            overlay_dfs_yq[year][quarter - 1])
 
             fig.tight_layout(pad=0.4, w_pad=0.5, h_pad=3.0)
 
