@@ -283,6 +283,7 @@ class DataframeTools:
         weekly_avg_dfs = self.avg_over_period(dfs, "week")
         mean, std = weekly_avg_dfs.select(F.mean("value"), F.stddev("value")).first()
 
+
         new_dfs = dfs.where((dfs.value >= (1 - thresh) * mean) & (dfs.value <= (1 + thresh) * mean)).orderBy("datetime")
 
         remove_count = dfs.select("value").count() - new_dfs.select("value").count()
@@ -394,7 +395,7 @@ class GroupDataTools(DataframeTools):
                 y = ts_pd[y_head].tolist()
                 x = ts_pd[x_head].tolist()
 
-                ax.plot(x, y, "-", label=lab)
+                ax.plot(x, y, ".--", label=lab)
                 ax.grid(True)
 
             if ("overlay" in kwargs.keys()) and ("overlay_dfs" in kwargs.keys()):
@@ -431,7 +432,7 @@ class GroupDataTools(DataframeTools):
                     y = ts_pd[y_head].tolist()
                     x = ts_pd[x_head].tolist()
 
-                    ax.plot(x, y, "-", label=lab)
+                    ax.plot(x, y, ".--", label=lab)
                     ax.grid(True)
                     ax.set_title("{}, {}".format(title, year), fontsize=16)
                     ax.legend(loc="best")
@@ -479,7 +480,7 @@ class GroupDataTools(DataframeTools):
                         y = ts_pd[y_head].tolist()
                         x = ts_pd[x_head].tolist()
 
-                        axs[(quarter - 1) + (4 * dfs_q)].plot(x, y, "-", label=lab)
+                        axs[(quarter - 1) + (4 * dfs_q)].plot(x, y, ".--", label=lab)
                         axs[(quarter - 1) + (4 * dfs_q)].grid(True)
                         axs[(quarter - 1) + (4 * dfs_q)].set_title("{}, {}, Q{}".format(title, year, quarter),
                                                                    fontsize=16)
