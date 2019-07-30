@@ -3,7 +3,7 @@ from pandas.util.testing import assert_frame_equal
 
 # Spark imports
 from pyspark.sql import SparkSession
-from pyspark.sql import functions as F
+from pyspark.sql import functions
 spark = SparkSession.builder.getOrCreate()
 
 # System imports
@@ -80,30 +80,6 @@ class Testnull2zero(unittest.TestCase):
         # Test equality
         assert_frame_equal(result, test)
 
-class Testnull2zero(unittest.TestCase):
-    def test_null2zero(self):
-        """
-        Test if null function works
-        """
-
-        # Construct dummy dataframe
-        dummy1 = [("John", 1.0, None, 3, 4, 5), ("Snow", 1.3, 3, 4, 5, None)]
-        df1 = spark.createDataFrame(dummy1, ["name", "a", "b", "c", "d", "e"])
-
-        # Construct expected dataframe
-        test1 = [("John", 1.0, 0, 3, 4, 5), ("Snow", 1.3, 3, 4, 5, 0)]
-        test = spark.createDataFrame(test1, ["name", "a", "b", "c", "d", "e"])
-        test = test.toPandas()
-
-        # Run method
-        dataeng = det.DataframeTools(df1)
-        result = dataeng.null2zero("b", df1)
-        result = dataeng.null2zero("e", result)
-        result = result.toPandas()
-
-        # Test equality
-        assert_frame_equal(result, test)
-
 class Testavgperiodday(unittest.TestCase):
     def test_avg_over_period(self):
         """
@@ -119,7 +95,8 @@ class Testavgperiodday(unittest.TestCase):
         value = [i for i in range(days*24)]
         df = [(i,j) for i,j in zip(date, value)]
         df1 = spark.createDataFrame(df, ["datetime", "value"])
-        df1 = df1.select(F.to_timestamp(F.col("datetime").cast("string"), "yyyy-MM-dd HH:mm:ss").alias("datetime"), df1["value"])
+        df1 = df1.select(functions.to_timestamp(
+            functions.col("datetime").cast("string"), "yyyy-MM-dd HH:mm:ss").alias("datetime"), df1["value"])
 
         # Construct expected resulting dataframe
         date = []
@@ -129,7 +106,8 @@ class Testavgperiodday(unittest.TestCase):
         value = [11.5, 35.5, 59.5, 83.5, 107.5]
         test1 = [(i,j) for i,j in zip(date, value)]
         test = spark.createDataFrame(test1, ["datetime", "value"])
-        test = test.select(F.to_timestamp(F.col("datetime").cast("string"), "yyyy-MM-dd HH:mm:ss").alias("datetime"), test["value"])
+        test = test.select(functions.to_timestamp(
+            functions.col("datetime").cast("string"), "yyyy-MM-dd HH:mm:ss").alias("datetime"), test["value"])
         test = test.toPandas()
 
         # Run method
