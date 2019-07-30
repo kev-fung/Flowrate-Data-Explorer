@@ -1,10 +1,7 @@
 # Import Modules
-from pyspark.sql.types import *
 from pyspark.sql import functions as F
-from pyspark.sql.types import LongType, StringType, StructField, StructType, BooleanType, ArrayType, IntegerType, TimestampType, DoubleType
+from pyspark.sql.types import IntegerType
 from pyspark.sql.functions import coalesce, lit, col, lead, lag
-from pyspark.sql.functions import stddev, mean
-from pyspark.sql import SQLContext
 from pyspark.sql.window import Window
 
 from operator import add
@@ -15,8 +12,6 @@ from googletrans import Translator
 # Standard Python Modules
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
-import pandas as pd
-import numpy as np
 import re
 
 
@@ -283,7 +278,7 @@ class DataframeTools:
         weekly_avg_dfs = self.avg_over_period(dfs, "week")
         mean, std = weekly_avg_dfs.select(F.mean("value"), F.stddev("value")).first()
 
-        new_dfs = dfs.where((dfs.value >= (1 - thresh) * mean) & (dfs.value <= (1 + thresh) * mean)).orderBy("datetime")
+        new_dfs = dfs.where((dfs.value >= (1-thresh)*mean) & (dfs.value <= (1+thresh)*mean)).orderBy("datetime")
 
         remove_count = dfs.select("value").count() - new_dfs.select("value").count()
         print("\nThresholding has removed: ", remove_count, " samples from dataframe")
@@ -394,7 +389,7 @@ class GroupDataTools(DataframeTools):
                 y = ts_pd[y_head].tolist()
                 x = ts_pd[x_head].tolist()
 
-                ax.plot(x, y, "-", label=lab)
+                ax.plot(x, y, ".--", label=lab)
                 ax.grid(True)
 
             if ("overlay" in kwargs.keys()) and ("overlay_dfs" in kwargs.keys()):
@@ -431,7 +426,7 @@ class GroupDataTools(DataframeTools):
                     y = ts_pd[y_head].tolist()
                     x = ts_pd[x_head].tolist()
 
-                    ax.plot(x, y, "-", label=lab)
+                    ax.plot(x, y, ".--", label=lab)
                     ax.grid(True)
                     ax.set_title("{}, {}".format(title, year), fontsize=16)
                     ax.legend(loc="best")
@@ -471,23 +466,22 @@ class GroupDataTools(DataframeTools):
             fig, axs = plt.subplots(plots, 1, figsize=(24, 8*plots))
             axs.flatten()
 
-            for dfs_y, lab in zip(dfs_yq, label_list):
-                for dfs_q in dfs_y:
-                    for q_plot, ax, year, quarter in zip(dfs_q, axs, kwargs["plot_quarterly"], range(1, 5)):
-                        ts_pd = q_plot.sort_values(x_head)
+            for dfs_y, lab in zip(range(len(dfs_yq)), label_list):
+                for dfs_q, year in zip(range(len(dfs_yq[0])), kwargs["plot_quarterly"]):
+                    for quarter in range(1, 5):
+                        ts_pd = dfs_yq[dfs_y][dfs_q][quarter - 1].sort_values(x_head)
 
                         y = ts_pd[y_head].tolist()
                         x = ts_pd[x_head].tolist()
 
-                        ax.plot(x, y, "-", label=lab)
-                        ax.grid(True)
-                        ax.set_title("{}, {}, Q{}".format(title, year, quarter), fontsize=16)
-                        ax.legend(loc="best")
-                        ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y-%m-%d %H:%M"))
-                        ax.xaxis.set_minor_formatter(mdates.DateFormatter("%Y-%m-%d"))
+                        axs[(quarter - 1) + (4 * dfs_q)].plot(x, y, ".--", label=lab)
+                        axs[(quarter - 1) + (4 * dfs_q)].grid(True)
+                        axs[(quarter - 1) + (4 * dfs_q)].set_title("{}, {}, Q{}".format(title, year, quarter),
+                                                                   fontsize=16)
+                        axs[(quarter - 1) + (4 * dfs_q)].legend(loc="best")
 
-                        ax.set_xlabel(x_head, fontsize=16)
-                        ax.set_ylabel(y_head, fontsize=16)
+                        axs[(quarter - 1) + (4 * dfs_q)].set_xlabel(x_head, fontsize=16)
+                        axs[(quarter - 1) + (4 * dfs_q)].set_ylabel(y_head, fontsize=16)
 
             if ("overlay" in kwargs.keys()) and ("overlay_dfs" in kwargs.keys()):
                 overlay_dfs_ = self.add_year_col(kwargs["overlay_dfs"])
@@ -496,9 +490,10 @@ class GroupDataTools(DataframeTools):
                 overlay_dfs_yq = [[overlay_dfs_.where((overlay_dfs_.year == y) & (overlay_dfs_.quarter == q)) for q in
                                    range(1, 5)] for y in kwargs["plot_quarterly"]]
 
-                for year in overlay_dfs_yq:
-                    for q, ax in zip(year, axs):
-                        self.__overlay_plot(ax, kwargs["overlay"], q)
+                for year in range(len(overlay_dfs_yq)):
+                    for quarter in range(1, 5):
+                        self.__overlay_plot(axs[(quarter - 1) + (4 * year)], kwargs["overlay"],
+                                            overlay_dfs_yq[year][quarter - 1])
 
             fig.tight_layout(pad=0.4, w_pad=0.5, h_pad=3.0)
 
@@ -539,8 +534,10 @@ class GroupDataTools(DataframeTools):
         assert len(weights) == len(offsets)
 
         def value(i):
-            if i < 0: return lag(v, -i).over(window)
-            if i > 0: return lead(v, i).over(window)
+            if i < 0:
+                return lag(v, -i).over(window)
+            if i > 0:
+                return lead(v, i).over(window)
             return v
 
         values = [coalesce(value(i) * w, lit(0)) / len(offsets) for i, w in zip(offsets, weights)]
