@@ -1,19 +1,19 @@
 import unittest
 from pandas.util.testing import assert_frame_equal
 
-# Spark imports
-from pyspark.sql import SparkSession
-from pyspark.sql import functions
-spark = SparkSession.builder.getOrCreate()
-
 # System imports
 import os
 import sys
 import importlib.util
 from pathlib import Path
 
+# Spark imports
+from pyspark.sql import SparkSession
+from pyspark.sql import functions
+spark = SparkSession.builder.getOrCreate()
 
-# import method for databricks cluster
+
+# import method for testing on databricks cluster
 def import_mod(module_name):
     cwd = os.getcwd()
     my_git_repo_exists = Path('{}/acse-9-independent-research-project-kkf18'.format(cwd))
