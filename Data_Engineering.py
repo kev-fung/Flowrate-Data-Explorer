@@ -285,6 +285,52 @@ class DataframeTools:
 
         return new_dfs
 
+    def df2dict(self, df, date_head="datetime"):
+        """Convert a dataframe of collected timeseries features into an organised dictionary.
+        ow_dict = {feature name : timeseries dataframe}
+
+          Args:
+            df (dataframe): input dataframe with different timeseries features
+            date_head (str): column name of datetime in df
+
+          Returns:
+            ow_dict (dict): organised dictionary of features from input dataframe
+
+        """
+
+        assert date_head in df.schema.names, "no date column in given dataframe!"
+
+        ow_dict = {}
+
+        for head in df.schema.names:
+            if head == date_head:
+                continue
+            ow_dict[head] = df.select(df[date_head].alias("datetime"), df[head].alias("value"))
+
+        return ow_dict
+
+    def dict2df(self, ow_dict):
+        """Convert a dictionary of timeseries features into a single dataframe of collected features.
+
+          Args:
+            ow_dict (dict): ow_dict should be in format {feature name : timeseries dataframe}
+
+          Returns:
+            dfs (dataframe): dataframe of combined features in format of: datetime|feature1|feature2|...
+
+        """
+
+        dfs = ow_dict[list(ow_dict.keys())[0]]
+        dfs = dfs.select(dfs["datetime"], dfs["value"].alias(list(ow_dict.keys())[0]))
+
+        for i, (head, df) in enumerate(ow_dict.items()):
+            if i == 0:
+                continue
+            df = df.select(df["datetime"], df["value"].alias(head))
+            dfs = dfs.join(df, df.datetime == dfs.datetime, how="left").drop(df.datetime)
+
+        return dfs
+
 
 class GroupDataTools(DataframeTools):
     """Subclass of Dataframe tools to reorganise dataframes into dictionaries.
@@ -563,3 +609,4 @@ class GroupDataTools(DataframeTools):
                          avg["avg"].alias(y_head))
 
         self.plot_ts(title, y_label, [avg])
+
