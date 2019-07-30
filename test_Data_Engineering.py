@@ -12,6 +12,7 @@ import sys
 import importlib.util
 from pathlib import Path
 
+
 # import method for databricks cluster
 def import_mod(module_name):
     cwd = os.getcwd()
@@ -28,6 +29,7 @@ def import_mod(module_name):
     print("Import successful")
 
     assert module_name in sys.modules.keys()
+
 
 import_mod("Data_Engineering")
 import Data_Engineering as det
@@ -57,8 +59,9 @@ class TestAppendData(unittest.TestCase):
         # Test equality
         assert_frame_equal(result, test)
 
+
 class Testnull2zero(unittest.TestCase):
-    def test_null2zero:
+    def test_null2zero(self):
         """
         Test if null function works
         """
@@ -79,6 +82,7 @@ class Testnull2zero(unittest.TestCase):
 
         # Test equality
         assert_frame_equal(result, test)
+
 
 class Testavgperiodday(unittest.TestCase):
     def test_avg_over_period(self):
@@ -117,6 +121,7 @@ class Testavgperiodday(unittest.TestCase):
 
         # Test equality
         assert_frame_equal(result, test)
+
 
 if __name__ == '__main__':
     unittest.main()
