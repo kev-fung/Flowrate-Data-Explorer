@@ -1,10 +1,7 @@
 # Import Modules
-from pyspark.sql.types import *
 from pyspark.sql import functions as F
-from pyspark.sql.types import LongType, StringType, StructField, StructType, BooleanType, ArrayType, IntegerType, TimestampType, DoubleType
+from pyspark.sql.types import IntegerType
 from pyspark.sql.functions import coalesce, lit, col, lead, lag
-from pyspark.sql.functions import stddev, mean
-from pyspark.sql import SQLContext
 from pyspark.sql.window import Window
 
 from operator import add
@@ -15,8 +12,6 @@ from googletrans import Translator
 # Standard Python Modules
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
-import pandas as pd
-import numpy as np
 import re
 
 
@@ -283,8 +278,7 @@ class DataframeTools:
         weekly_avg_dfs = self.avg_over_period(dfs, "week")
         mean, std = weekly_avg_dfs.select(F.mean("value"), F.stddev("value")).first()
 
-
-        new_dfs = dfs.where((dfs.value >= (1 - thresh) * mean) & (dfs.value <= (1 + thresh) * mean)).orderBy("datetime")
+        new_dfs = dfs.where((dfs.value >= (1-thresh)*mean) & (dfs.value <= (1+thresh)*mean)).orderBy("datetime")
 
         remove_count = dfs.select("value").count() - new_dfs.select("value").count()
         print("\nThresholding has removed: ", remove_count, " samples from dataframe")
@@ -540,8 +534,10 @@ class GroupDataTools(DataframeTools):
         assert len(weights) == len(offsets)
 
         def value(i):
-            if i < 0: return lag(v, -i).over(window)
-            if i > 0: return lead(v, i).over(window)
+            if i < 0:
+                return lag(v, -i).over(window)
+            if i > 0:
+                return lead(v, i).over(window)
             return v
 
         values = [coalesce(value(i) * w, lit(0)) / len(offsets) for i, w in zip(offsets, weights)]
