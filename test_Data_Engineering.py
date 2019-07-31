@@ -1,19 +1,19 @@
 import unittest
 from pandas.util.testing import assert_frame_equal
 
-# Spark imports
-from pyspark.sql import SparkSession
-from pyspark.sql import functions
-spark = SparkSession.builder.getOrCreate()
-
 # System imports
 import os
 import sys
 import importlib.util
 from pathlib import Path
 
+# Spark imports
+from pyspark.sql import SparkSession
+from pyspark.sql import functions
+spark = SparkSession.builder.getOrCreate()
 
-# import method for databricks cluster
+
+# import method for testing on databricks cluster
 def import_mod(module_name):
     cwd = os.getcwd()
     my_git_repo_exists = Path('{}/acse-9-independent-research-project-kkf18'.format(cwd))
@@ -47,7 +47,8 @@ class TestAppendData(unittest.TestCase):
         df2 = spark.createDataFrame(dummy2, ["name", "a", "b", "c", "d", "e"])
 
         # Construct expected dataframe
-        test1 = [("John", 1.0, 2, 3, 4, 5), ("Snow", 1.3, 3, 4, 5, 6), ("JJ", 1.0, 2, 3, 8, 5), ("Bizarre", 1.8, 3, 3, 5, 6)]
+        test1 = [("John", 1.0, 2, 3, 4, 5), ("Snow", 1.3, 3, 4, 5, 6), ("JJ", 1.0, 2, 3, 8, 5),
+                 ("Bizarre", 1.8, 3, 3, 5, 6)]
         test = spark.createDataFrame(test1, ["name", "a", "b", "c", "d", "e"])
         test = test.toPandas()
 
@@ -97,7 +98,7 @@ class Testavgperiodday(unittest.TestCase):
                 date.append("2019-07-0{} {}:00:00".format(day, hour))
 
         value = [i for i in range(days*24)]
-        df = [(i,j) for i,j in zip(date, value)]
+        df = [(i, j) for i, j in zip(date, value)]
         df1 = spark.createDataFrame(df, ["datetime", "value"])
         df1 = df1.select(functions.to_timestamp(
             functions.col("datetime").cast("string"), "yyyy-MM-dd HH:mm:ss").alias("datetime"), df1["value"])
@@ -108,7 +109,7 @@ class Testavgperiodday(unittest.TestCase):
             date.append("2019-07-0{} 00:00:00".format(day))
 
         value = [11.5, 35.5, 59.5, 83.5, 107.5]
-        test1 = [(i,j) for i,j in zip(date, value)]
+        test1 = [(i, j) for i, j in zip(date, value)]
         test = spark.createDataFrame(test1, ["datetime", "value"])
         test = test.select(functions.to_timestamp(
             functions.col("datetime").cast("string"), "yyyy-MM-dd HH:mm:ss").alias("datetime"), test["value"])
