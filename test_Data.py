@@ -31,7 +31,7 @@ def import_mod(module_name):
 
 # Import homemade modules
 import_mod("Data")
-import Data as data
+from Data import Data
 
 
 class TestData(unittest.TestCase):
@@ -60,7 +60,8 @@ class TestData(unittest.TestCase):
         test = test.toPandas()
 
         # Run method
-        result = data.Data.add_year_col(df1)
+        d = Data(df1)
+        result = d.add_year_col(df1)
         result = result.toPandas()
 
         # Test equality
@@ -90,7 +91,8 @@ class TestData(unittest.TestCase):
         test = test.toPandas()
 
         # Run method
-        result = data.Data.add_quart_col(df1)
+        d = Data(df1)
+        result = d.add_quart_col(df1)
         result = result.toPandas()
 
         # Test equality
