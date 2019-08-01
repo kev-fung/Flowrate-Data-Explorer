@@ -60,7 +60,7 @@ class TestData(unittest.TestCase):
         test = test.toPandas()
 
         # Run method
-        result = data.data.add_year_col(df1)
+        result = data.Data.add_year_col(df1)
         result = result.toPandas()
 
         # Test equality
@@ -90,7 +90,7 @@ class TestData(unittest.TestCase):
         test = test.toPandas()
 
         # Run method
-        result = data.data.add_quart_col(df1)
+        result = data.Data.add_quart_col(df1)
         result = result.toPandas()
 
         # Test equality
