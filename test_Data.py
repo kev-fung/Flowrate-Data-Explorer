@@ -45,7 +45,7 @@ class TestData(unittest.TestCase):
         for year in range(1, years):
             for mon in range(1, months):
                 date.append("201{}-0{}-01 00:00:00".format(year, mon))
-                year_res.append(np.int32("201{}".format(year)))
+                year_res.append(int("201{}".format(year)))
         value = [i for i in range(years * months)]
         df = [(i, j) for i, j in zip(date, value)]
         df1 = spark.createDataFrame(df, ["datetime", "value"])
@@ -58,7 +58,7 @@ class TestData(unittest.TestCase):
         test = test.select(functions.to_timestamp(
             functions.col("datetime").cast("string"), "yyyy-MM-dd HH:mm:ss").alias("datetime"), test["value"],
                            test["year"])
-        test = test.toPandas()
+        test = test.toPandas().astype({'year': 'int32'})
 
         # Run method
         d = Data(df1)
@@ -84,12 +84,12 @@ class TestData(unittest.TestCase):
             functions.col("datetime").cast("string"), "yyyy-MM-dd HH:mm:ss").alias("datetime"), df1["value"])
 
         # Construct expected resulting dataframe
-        test1 = [(i, j, np.int32(k)) for i, j, k in zip(date, value, quart_res)]
+        test1 = [(i, j, k) for i, j, k in zip(date, value, quart_res)]
         test = spark.createDataFrame(test1, ["datetime", "value", "quarter"])
         test = test.select(functions.to_timestamp(
             functions.col("datetime").cast("string"), "yyyy-MM-dd HH:mm:ss").alias("datetime"), test["value"],
                            test["quarter"])
-        test = test.toPandas()
+        test = test.toPandas().astype({'quarter': 'int32'})
 
         # Run method
         d = Data(df1)
