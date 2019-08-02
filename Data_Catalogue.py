@@ -69,7 +69,7 @@ class DataframeTools(Data.Data):
             print("\nCurrent samples: ", old_df.count())
             print("Appending samples: ", new_df.count())
             df = old_df.union(new_df)
-            print("Joined samples: ", self.df.count())
+            print("Joined samples: ", df.count())
         else:
             df = old_df.union(new_df)
 
