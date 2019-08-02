@@ -183,7 +183,7 @@ class DictionaryTools(DataframeTools):
             y_head (str): second column (normally value) to reconstruct corresponding dataframe
 
         """
-        assert label_head in df.headers, "Header does not exist in dataframe!"
+        assert label_head in df.schema.names, "Header does not exist in dataframe!"
 
         df_dict = {}
         unq_items = df.select(label_head).distinct()
