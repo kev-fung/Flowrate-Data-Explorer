@@ -62,7 +62,7 @@ class DataProcessTools(Data.Data):
         # Translate descriptions
         translator = Translator()
         # Select distinct comments
-        n = df.select(dfs[head]).distinct().rdd.map(lambda x: x[head]).collect()
+        n = df.select(df[head]).distinct().rdd.map(lambda x: x[head]).collect()
         # Make a dictionary to translate distinct comments
         translation_dict = {col: translator.translate(col, src=src, dest=dest).text for col in n}
         # Utilise spark method and replace all norweigan comments with translated ones
