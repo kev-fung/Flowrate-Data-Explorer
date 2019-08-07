@@ -1,6 +1,5 @@
 import unittest
 from pandas.util.testing import assert_frame_equal
-import numpy as np
 import os
 import sys
 import importlib.util
@@ -11,12 +10,13 @@ spark = SparkSession.builder.getOrCreate()
 
 
 def import_mod(module_name):
-    """Method to be able to import homemade .py modules in Azure Databricks
-        This must be declared and called before importing any homemade modules!
+    """Method to be able to import homemade .py modules in Azure Databricks. This must be declared and called before
+    importing any homemade modules!
+    Args:
+        module_name (str): Name of the module to import
 
-        Args:
-            module_name (str): Name of the module to import
-
+    Returns:
+        None
     """
     cwd = os.getcwd()
     my_git_repo_exists = Path('{}/acse-9-independent-research-project-kkf18'.format(cwd))
@@ -32,7 +32,7 @@ def import_mod(module_name):
 
 # Import homemade modules
 import_mod("Data")
-from Data import Data
+import Data as data
 
 
 class TestData(unittest.TestCase):
@@ -61,8 +61,7 @@ class TestData(unittest.TestCase):
         test = test.toPandas().astype({'year': 'int32'})
 
         # Run method
-        d = Data(df1)
-        result = d.add_year_col(df1)
+        result = data.add_year_col(df1)
         result = result.toPandas()
 
         # Test equality
@@ -92,8 +91,7 @@ class TestData(unittest.TestCase):
         test = test.toPandas().astype({'quarter': 'int32'})
 
         # Run method
-        d = Data(df1)
-        result = d.add_quart_col(df1)
+        result = data.add_quart_col(df1)
         result = result.toPandas()
 
         # Test equality

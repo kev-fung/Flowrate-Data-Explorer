@@ -6,6 +6,7 @@ todo:
 """
 import unittest
 from pandas.util.testing import assert_frame_equal
+import numpy as np
 import os
 import sys
 import importlib.util
@@ -16,13 +17,14 @@ spark = SparkSession.builder.getOrCreate()
 
 
 def import_mod(module_name):
-    """Method to be able to import homemade .py modules in Azure Databricks
-        This must be declared and called before importing any homemade modules!
+    """Method to be able to import homemade .py modules in Azure Databricks. This must be declared and called before
+     importing any homemade modules!
+     Args:
+         module_name (str): Name of the module to import
 
-        Args:
-            module_name (str): Name of the module to import
-
-    """
+     Returns:
+         None
+     """
     cwd = os.getcwd()
     my_git_repo_exists = Path('{}/acse-9-independent-research-project-kkf18'.format(cwd))
     spec = importlib.util.spec_from_file_location("{}.py".format(module_name),
@@ -37,7 +39,7 @@ def import_mod(module_name):
 
 # Import homemade modules
 import_mod("Data_Process")
-import Data_Process
+import Data_Process as DP
 
 
 class TestDataProcess(unittest.TestCase):
@@ -69,12 +71,33 @@ class TestDataProcess(unittest.TestCase):
         test = test.toPandas()
 
         # Run method
-        dproc = Data_Process.DataProcessTools(df1)
-        result = dproc.avg_over_period(df1, period="day")
+        result = DP.avg_over_period(df1, period="day")
         result = result.toPandas()
 
         # Test equality
         assert_frame_equal(result, test)
+
+    def test_zscore_method(self):
+        """Test if zscore method produces 0 mean and 1 stddev in columns"""
+
+        # Construct dummy DataFrame with datetime:
+        date, years, months = [], 2, 12
+        for year in range(1, years):
+            for mon in range(1, months):
+                date.append("201{}-0{}-01 00:00:00".format(year, mon))
+        value = [i for i in range(years * months)]
+        df = [(i, j) for i, j in zip(date, value)]
+        df1 = spark.createDataFrame(df, ["datetime", "value"])
+        df1 = df1.select(functions.to_timestamp(
+            functions.col("datetime").cast("string"), "yyyy-MM-dd HH:mm:ss").alias("datetime"), df1["value"])
+
+        # Run method
+        testu = DP.zscore_standard(df1)
+
+        # Test if mean and stddev is 0 and 1
+        ll = testu.select(functions.mean("value"), functions.stddev("value")).collect()
+        print(ll[0][0], ll[0][1])
+        assert np.isclose(0, ll[0][0]) & np.isclose(ll[0][1], 1)
 
 
 if __name__ == '__main__':

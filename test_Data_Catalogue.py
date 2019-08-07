@@ -15,13 +15,14 @@ spark = SparkSession.builder.getOrCreate()
 
 
 def import_mod(module_name):
-    """Method to be able to import homemade .py modules in Azure Databricks
-        This must be declared and called before importing any homemade modules!
+    """Method to be able to import homemade .py modules in Azure Databricks. This must be declared and called before
+     importing any homemade modules!
+     Args:
+         module_name (str): Name of the module to import
 
-        Args:
-            module_name (str): Name of the module to import
-
-    """
+     Returns:
+         None
+     """
     cwd = os.getcwd()
     my_git_repo_exists = Path('{}/acse-9-independent-research-project-kkf18'.format(cwd))
     spec = importlib.util.spec_from_file_location("{}.py".format(module_name),
@@ -36,7 +37,7 @@ def import_mod(module_name):
 
 # Import homemade modules
 import_mod("Data_Catalogue")
-import Data_Catalogue
+import Data_Catalogue as DC
 
 
 class TestDataCatalogue(unittest.TestCase):
@@ -56,8 +57,8 @@ class TestDataCatalogue(unittest.TestCase):
         test = test.toPandas()
 
         # Run method
-        dcat = Data_Catalogue.DataframeTools(df1)
-        result = dcat.append_data(df1, df2, False)
+        dataframetools = DC.DataframeTools()
+        result = dataframetools.append_data(df1, df2, False)
         result = result.toPandas()
 
         # Test equality
@@ -76,9 +77,9 @@ class TestDataCatalogue(unittest.TestCase):
         test = test.toPandas()
 
         # Run method
-        dcat = Data_Catalogue.DataframeTools(df1)
-        result = dcat.null2zero("b", df1)
-        result = dcat.null2zero("e", result)
+        dataframetools = DC.DataframeTools()
+        result = dataframetools.null2zero("b", df1)
+        result = dataframetools.null2zero("e", result)
         result = result.toPandas()
 
         # Test equality

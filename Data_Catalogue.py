@@ -22,12 +22,13 @@ from pathlib import Path
 
 
 def import_mod(module_name):
-    """Method to be able to import homemade .py modules in Azure Databricks
-        This must be declared and called before importing any homemade modules!
+    """Method to be able to import homemade .py modules in Azure Databricks. This must be declared and called before
+    importing any homemade modules!
+    Args:
+        module_name (str): Name of the module to import
 
-        Args:
-            module_name (str): Name of the module to import
-
+    Returns:
+        None
     """
     cwd = os.getcwd()
     my_git_repo_exists = Path('{}/acse-9-independent-research-project-kkf18'.format(cwd))
@@ -43,29 +44,24 @@ def import_mod(module_name):
 
 # Import homemade modules
 import_mod("Data")
-import Data
+from Data import plot_ts, add_year_col, add_quart_col
 
 
-class DataframeTools(Data.Data):
+class DataframeTools:
     """Parent class for manipulating spark dataframes"""
 
-    def __init__(self, df):
-        super().__init__(df)
-
-    def append_data(self, old_df, new_df, verbatim=True):
-        """Append another dataframe below the current one.
-            New dataframe must have the same columns as the original dataframe.
-
+    def append_data(self, old_df, new_df, v=True):
+        """Append another Spark DataFrame below the current one. New DataFrame must have the same columns as
+        the original DataFrame.
         Args:
-            old_df (dataframe): Old dataframe to append new one to
-            new_df (dataframe): New dataframe
-            verbatim (bool): Print counts before and after appending
+            old_df (Spark DataFrame): Old DataFrame to append new one to
+            new_df (Spark DataFrame): New DataFrame
+            v (bool): print verbatim
 
         Returns:
-            df (dataframe): joined dataframe
-
+            Spark DataFrame: joined Spark DataFrame
         """
-        if verbatim is True:
+        if v is True:
             print("\nCurrent samples: ", old_df.count())
             print("Appending samples: ", new_df.count())
             df = old_df.union(new_df)
@@ -76,27 +72,26 @@ class DataframeTools(Data.Data):
         return df
 
     def is_null(self, df):
-        """Check all columns in dataframe for null values.
-
+        """Check all columns for null values in Spark DataFrame
         Args:
-          df (dataframe): Input dataframe
+          df (Spark DataFrame): Input Spark DataFrame
 
+        Returns:
+            None
         """
         print("\nNumber of samples with null across columns:")
         for col in df.schema:
             head = col.name
             print(head, df.where(df[head].isNull() == True).count())
 
-    def null2zero(self, head, df):
-        """Change null values to zero in column
-
+    def null2zero(self, df, head):
+        """Change null values to zero in column of Spark DataFrame
         Args:
+            df (Spark DataFrame): Input Spark DataFrame
             head (str): Column name to replace nulls
-            df (dataframe): Input dataframe
 
         Returns:
-            dfs (dataframe): dataframe with replaced null values
-
+            Spark DataFrame: Spark DataFrame with replaced null values
         """
         print("\nReplacing null values with zero")
         dfs = df.na.fill(0, head)
@@ -117,18 +112,17 @@ class DataframeTools(Data.Data):
         return dfs
 
     def df2dict(self, df, date_head="datetime"):
-        """Convert a dataframe of collected timeseries features into an organised dictionary.
-            ow_dict = {feature name : timeseries dataframe}
-
+        """Convert a Spark DataFrame of columns of timeseries features into an organised dictionary.
+            EXAMPLE:
+                ow_dict = {feature name : timeseries dataframe}
         Args:
-            df (dataframe): input dataframe with different timeseries features
-            date_head (str): column name of datetime in df
+            df (Spark DataFrame): input Spark DataFrame with different features
+            date_head (str): column name of datetime in Spark DataFrame
 
         Returns:
-            ow_dict (dict): organised dictionary of features from input dataframe
-
+            Dict: organised dictionary of features from Spark DataFrame
         """
-        assert date_head in df.schema.names, "no date column in given dataframe!"
+        assert date_head in df.schema.names, "no date column in given DataFrame!"
 
         ow_dict = {}
         for head in df.schema.names:
@@ -138,14 +132,12 @@ class DataframeTools(Data.Data):
         return ow_dict
 
     def dict2df(self, ow_dict):
-        """Convert a dictionary of timeseries features into a single dataframe of collected features.
-
+        """Convert a dictionary of timeseries features into a Spark DataFrame of columns of these features.
         Args:
-            ow_dict (dict): EXAMPLE K:V FORMAT {feature name : timeseries dataframe}
+            ow_dict (dict): input dictionary of features
 
         Returns:
-            dfs (dataframe): dataframe of combined features with FORMAT: datetime|feature1|feature2|etc.
-
+            Spark DataFrame: DataFrame with columns of features
         """
         dfs = ow_dict[list(ow_dict.keys())[0]]
         dfs = dfs.select(dfs["datetime"], dfs["value"].alias(list(ow_dict.keys())[0]))
@@ -160,28 +152,19 @@ class DataframeTools(Data.Data):
 
 
 class DictionaryTools(DataframeTools):
-    """Subclass of Dataframe tools to reorganise dataframes into dictionaries.
-      Tools for visualisation and preprocessing included.
-    """
-
-    def __init__(self, df):
-        super().__init__(df)
-        # if df_dict is None:
-        #     self.df_dict = {}
-        # else:
-        #     self.df_dict = df_dict
-        # self.headers = [h.name for h in df.schema]
+    """Subclass of Dataframe tools to reorganise dataframes into dictionaries."""
 
     def separate2dict(self, df, label_head, x_head='datetime', y_head='value'):
-        """Collect rows which contain the same label in label_head column and
-            put them as a key value pair in dictionary. Applicable for messy timeseries data.
-
+        """Collect rows which contain the same label in label_head column and put them as a key value pair in
+        dictionary. Applicable for messy timeseries data.
         Args:
-            df (dataframe): input dataframe
+            df (Spark DataFrame): input Spark DataFrame
             label_head (str): column to separate the data
-            x_head (str): first column (normally time) to reconstruct corresponding dataframe
-            y_head (str): second column (normally value) to reconstruct corresponding dataframe
+            x_head (str): first column (normally time) to reconstruct corresponding DataFrame
+            y_head (str): second column (normally value) to reconstruct corresponding DataFrame
 
+        Returns:
+            Dictionary: Dictionary of Spark DataFrames splitted by disctinct values in label_head column
         """
         assert label_head in df.schema.names, "Header does not exist in dataframe!"
 
@@ -197,15 +180,12 @@ class DictionaryTools(DataframeTools):
         """Separate data out even further based on distinct substrings in target label column.
             Only for dictionaries with split data already. I.e. Further separates the data into
             finer dictionaries based on given distinct substrings.
-
         Args:
-            df_dict (dict): Sorted timeseries data which has already been separated
+            df_dict (dict): sorted timeseries data which has already been separated
             regex (str): substring to match inside label, FORMAT: RE Wildcard
 
         Returns:
-            out_dict (dict): Dictionary with only key value pairs from old dictionary that matched
-                                with the regex.
-
+            Dictionary: Dictionary with only key value pairs from old dictionary that matched with the regex.
         """
         out_dict = {}
         for (key, val) in df_dict.items():
@@ -217,14 +197,12 @@ class DictionaryTools(DataframeTools):
 
     def decode_keys(self, in_dict, decode_dict):
         """Replace old keys with new key names given a decode_dict dictionary.
-
           Args:
               in_dict (dict): input dictionary
               decode_dict (dict): dictionary of old keys with new key names
 
           Returns:
-              new_dict (dict): dictionary with updated keys
-
+              Dictionary: dictionary with updated keys
         """
         new_dict = {}
         for key, val in in_dict.items():
