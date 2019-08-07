@@ -2,9 +2,8 @@
 ### Developed Package: SparkDEA (Data Exploration Analysis)
 
 This project aims to investigate the scaling of oilwells and its detection given large quantitites of well data.
-The first concurrent objective is to develop a Python Package to organise, explore, and model data in Spark SQL DataFrames to simplify and reuse relevant data methods typically used in a data engineering and science workflow.
-The second concurrent objective is to use the package in an Azure Databricks Notebook Environment to investigate the problem 
-with classified data residing in the DataLake.
+The first objective is to develop a Python Package to organise, explore, and model data in Spark SQL DataFrames for Spark manipulation resuability.
+The second objective is to investigate the problem in an Azure Databricks Notebook Environment with classified data residing in the Azure DataLake. Both objectives are completed concurrently together.
 
 This repository contains (To be updated):
 1. Spark Data Modules
