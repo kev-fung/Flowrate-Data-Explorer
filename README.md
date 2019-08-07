@@ -9,7 +9,7 @@ with classified data residing in the DataLake.
 This repository contains (To be updated):
 1. Spark Data Modules
 2. Spark Data Tests
-3. Example Workflow Notebook
+3. Workflow Notebook with Investigations
 
 
 ## Table of Contents
