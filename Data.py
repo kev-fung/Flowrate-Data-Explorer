@@ -50,7 +50,7 @@ class Data:
                 y = ts_pd[y_head].tolist()
                 x = ts_pd[x_head].tolist()
 
-                if marker is not None:
+                if marker_dict is not None:
                     for marker, dfs_list in marker_dict.items():
                         if ts_df in dfs_list:
                             axs.plot(x, y, marker, label=lab)
