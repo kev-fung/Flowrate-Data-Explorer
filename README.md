@@ -1,5 +1,5 @@
-# IRP: Oilfield Scale Detection with Machine Learning
-### Package: Spark DEA (Data Exploration Analysis)
+# Oilfield Scale Detection with Machine Learning
+### Developed Package: Spark DEA (Data Exploration Analysis)
 
 The project is split into two concurrent objectives for investigating oilfield scaling in oilwells 
 given large quantitites of oilwell data. The first is to develop Python Package to organise, explore, and model 
