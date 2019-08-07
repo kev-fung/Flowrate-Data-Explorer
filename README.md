@@ -1,23 +1,22 @@
-# IRP: Oilfield Scale Detection with Machine Learning
-### Package: Spark DEA (Data Exploration Analysis)
+# Oilfield Scale Detection with Machine Learning
+### Developed Package: SparkDEA (Data Exploration Analysis)
 
-The project is split into two concurrent objectives for investigating oilfield scaling in oilwells 
-given large quantitites of oilwell data. The first is to develop Python Package to organise, explore, and model 
-provided data in Spark SQL DataFrames to simplify and reuse Spark DataFrame manipulations and modelling. 
-The second is to use the package in an Azure Databricks Notebook Environment to investigate the problem 
+This project aims to investigate the scaling of oilwells and its detection given large quantitites of well data.
+The first concurrent objective is to develop a Python Package to organise, explore, and model data in Spark SQL DataFrames to simplify and reuse relevant data methods typically used in a data engineering and science workflow.
+The second concurrent objective is to use the package in an Azure Databricks Notebook Environment to investigate the problem 
 with classified data residing in the DataLake.
 
 This repository contains (To be updated):
 1. Spark Data Modules
 2. Spark Data Tests
-3. Example Workflow Notebook
+3. Workflow Notebook with Investigations
 
 
 ## Table of Contents
 
 - [Installation](#installation)
 - [Usage](#usage)
-- [Contributers](#contributers)
+- [Author](#contributers)
 - [License](#license)
 - [Version Log](#version-control-log-history)
 
@@ -29,7 +28,7 @@ This repository contains (To be updated):
 
 ## License
 
-## Version Control Log History
+## Version Log
 
 Due to company reasons and data privacy control, version controlling approach may change over time. 
 A log below will keep track of these changes.
