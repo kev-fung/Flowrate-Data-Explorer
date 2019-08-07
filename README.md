@@ -28,7 +28,7 @@ This repository contains (To be updated):
 
 ## License
 
-## Version Control Log History
+## Version Log
 
 Due to company reasons and data privacy control, version controlling approach may change over time. 
 A log below will keep track of these changes.
