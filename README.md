@@ -1,9 +1,8 @@
 # Oilfield Scale Detection with Machine Learning
 ### Developed Package: Spark DEA (Data Exploration Analysis)
 
-This project investigates oilfield scaling in oilwells given large quantitites of oilwell data.
-The first concurrent objective is to develop Python Package to organise, explore, and model 
-provided data in Spark SQL DataFrames to simplify and reuse Spark DataFrame manipulations and modelling. 
+This project aims to investigate the scaling of oilwells and its detection given large quantitites of well data.
+The first concurrent objective is to develop a Python Package to organise, explore, and model data in Spark SQL DataFrames to simplify and reuse relevant data methods typically used in a data engineering and science workflow.
 The second concurrent objective is to use the package in an Azure Databricks Notebook Environment to investigate the problem 
 with classified data residing in the DataLake.
 
