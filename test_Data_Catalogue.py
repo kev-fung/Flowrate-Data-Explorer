@@ -78,8 +78,8 @@ class TestDataCatalogue(unittest.TestCase):
 
         # Run method
         dataframetools = DC.DataframeTools()
-        result = dataframetools.null2zero("b", df1)
-        result = dataframetools.null2zero("e", result)
+        result = dataframetools.null2zero(df1, "b")
+        result = dataframetools.null2zero(result, "e")
         result = result.toPandas()
 
         # Test equality
