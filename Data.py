@@ -5,6 +5,10 @@ pipeline stages (Catalogue, Process, Analytics) in the Azure Databricks
 environment.
 
 @author: Kevin Fung
+
+todo:
+    plot_ts: Include stylised marker lines for given groups of ts data in the yearly and quarterly plots
+
 """
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
@@ -16,8 +20,8 @@ class Data:
     def __init__(self, df):
         self.df = df
 
-    def plot_ts(self, title, x_head, y_head, ts_df_list, label_list=None, **kwargs):
-        """Plot multiple timeseries dataframe onto a figure, x axis = time, y axis = value.
+    def plot_ts(self, title, x_head, y_head, ts_df_list, label_list=None, marker_dict=None, **kwargs):
+        """Plot multiple timeseries spark dataframes onto a figure, x axis = time, y axis = value.
 
         Args:
             title (str): Name of dataframe
@@ -25,6 +29,7 @@ class Data:
             y_head (str): Name of column to be plotted along y axis
             ts_df_list (list): list of timeseries dataframes to plot
             label_list (list): list of plot labels
+            marker_dict (dict): dict of lists of dataframes with desired marker styles {marker:list}
 
             **kwargs:
                 overlay (str): header of column containing descriptions
@@ -37,7 +42,7 @@ class Data:
             label_list = ["value"]
 
         if "plot_yearly" not in kwargs.keys():
-            fig, ax = plt.subplots(1, 1, figsize=(24, 8))
+            fig, axs = plt.subplots(1, 1, figsize=(24, 8))
 
             for ts_df, lab in zip(ts_df_list, label_list):
                 ts_pd = ts_df.orderBy(x_head).toPandas()
@@ -45,21 +50,27 @@ class Data:
                 y = ts_pd[y_head].tolist()
                 x = ts_pd[x_head].tolist()
 
-                ax.plot(x, y, ".--", label=lab)
-                ax.grid(True)
+                if marker is not None:
+                    for marker, dfs_list in marker_dict.items():
+                        if ts_df in dfs_list:
+                            axs.plot(x, y, marker, label=lab)
+                            axs.grid(True)
+                else:
+                    axs.plot(x, y, '*--', label=lab)
+                    axs.grid(True)
 
             if ("overlay" in kwargs.keys()) and ("overlay_dfs" in kwargs.keys()):
                 # the overlay dataframe should have a value column which is the same as another column being plotted!
-                self.__overlay_plot(ax, kwargs["overlay"], kwargs["overlay_dfs"])
+                self.__overlay_plot(axs, kwargs["overlay"], kwargs["overlay_dfs"])
 
-            ax.set_title(title, fontsize=16)
-            ax.set_xlabel(x_head, fontsize=16)
-            ax.set_ylabel(y_head, fontsize=16)
+            axs.set_title(title, fontsize=16)
+            axs.set_xlabel(x_head, fontsize=16)
+            axs.set_ylabel(y_head, fontsize=16)
 
-            ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y-%m-%d %H:%M"))
-            ax.xaxis.set_minor_formatter(mdates.DateFormatter("%Y-%m-%d"))
+            axs.xaxis.set_major_formatter(mdates.DateFormatter("%Y-%m-%d %H:%M"))
+            axs.xaxis.set_minor_formatter(mdates.DateFormatter("%Y-%m-%d"))
 
-            ax.legend(loc="best")
+            axs.legend(loc="best")
 
             fig.tight_layout(pad=0.4, w_pad=0.5, h_pad=3.0)
 
@@ -153,7 +164,7 @@ class Data:
 
             fig.tight_layout(pad=0.4, w_pad=0.5, h_pad=3.0)
 
-        return fig
+        return fig, axs
 
     def __overlay_plot(self, ax, overlay, overlay_df):
         """Private function to plot descriptive data over linear graphs
