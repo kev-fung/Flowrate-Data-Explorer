@@ -2,13 +2,12 @@
 ### Package: Spark DEA (Data Exploration Analysis)
 
 The project is split into two concurrent objectives for investigating oilfield scaling in oilwells 
-given large quantitites of oilwell data.
-- Develop Python Package to organise, explore, and model provided data in Spark SQL DataFrames
-to simplify and reuse Spark DataFrame manipulations and modelling. 
-- Utilise Package in an Azure Databricks Notebook Environment to investigate the problem with classified data 
-residing in the DataLake.
+given large quantitites of oilwell data. The first is to develop Python Package to organise, explore, and model 
+provided data in Spark SQL DataFrames to simplify and reuse Spark DataFrame manipulations and modelling. 
+The second is to use the package in an Azure Databricks Notebook Environment to investigate the problem 
+with classified data residing in the DataLake.
 
-The repository contains (To be updated):
+This repository contains (To be updated):
 1. Spark Data Modules
 2. Spark Data Tests
 3. Example Workflow Notebook
