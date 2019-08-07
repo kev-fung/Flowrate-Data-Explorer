@@ -16,7 +16,7 @@ This repository contains (To be updated):
 
 - [Installation](#installation)
 - [Usage](#usage)
-- [Contributers](#contributers)
+- [Author](#contributers)
 - [License](#license)
 - [Version Log](#version-control-log-history)
 
