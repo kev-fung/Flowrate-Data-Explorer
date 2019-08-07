@@ -113,7 +113,7 @@ class DataProcessTools(Data.Data):
         new_df = new_df.withColumnRenamed("datetime_orig", "datetime")
 
         print("\nOverlaid records onto timeseries: You may need to remove/merge duplicates!")
-        print("Duplicates found: ", new_df.dropDuplicates(["datetime"]).count())
+        print("\nDuplicates found: ", new_df.dropDuplicates(["datetime"]).count())
 
         return new_df
 
@@ -166,7 +166,8 @@ class DataProcessTools(Data.Data):
         schema_red = df.schema
         new_df = sqlContext.createDataFrame(reduced, schema_red).orderBy("datetime")
         if new_df.count() > new_df.dropDuplicates(["datetime"]).count():
-            raise ValueError('Data has duplicates')
+            raise ValueError('\nData still has duplicates!')
+        print("\nDuplicates have been merged")
 
         return new_df
 
