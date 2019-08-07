@@ -3,7 +3,7 @@
 
 This project aims to investigate the scaling of oilwells and its detection given large quantitites of well data.
 The first objective is to develop a Python Package to organise, explore, and model data in Spark SQL DataFrames for ease of exploring and analysing Spark data.
-The second objective is to investigate the problem in an Azure Databricks Notebook Environment with classified data residing in the Azure DataLake. Both objectives are completed concurrently together.
+The second objective is to investigate the problem in an Azure Databricks Notebook Environment with classified data residing in the Azure DataLake using the developed package. Both objectives are completed concurrently because the investigations will require constantly new methods for analysis from the package.
 
 This repository contains (To be updated):
 1. Spark Data Modules
