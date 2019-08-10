@@ -131,28 +131,36 @@ class DataframeTools:
             ow_dict[head] = df.select(df[date_head].alias("datetime"), df[head].alias("value"))
         return ow_dict
 
-    def dict2df(self, ow_dict):
+    def dict2df(self, ow_dict, datename="datetime", valname="value"):
         """Convert a dictionary of timeseries features into a Spark DataFrame of columns of these features.
+        Each DataFrame in the dictionary must have the same formatted datetime columns and sizes!
         Args:
-            ow_dict (dict): input dictionary of features
+            ow_dict (dict): Input dictionary of features
+            datename (str): Name of the column to join by
+            valname (str): Name of the value column
 
         Returns:
             Spark DataFrame: DataFrame with columns of features
         """
+        for df in ow_dict.values():
+            assert datename in df.schema.names, "Inconsistent datetime column names"
+            assert valname in df.schema.names, "Inconsistent value column names"
+
+        # Pull the first kv pair in dictionary out as a DataFrame
         dfs = ow_dict[list(ow_dict.keys())[0]]
-        dfs = dfs.select(dfs["datetime"], dfs["value"].alias(list(ow_dict.keys())[0]))
+        dfs = dfs.select(dfs[datename], dfs[valname].alias(list(ow_dict.keys())[0]))
 
         for i, (head, df) in enumerate(ow_dict.items()):
             if i == 0:
                 continue
-            df = df.select(df["datetime"], df["value"].alias(head))
-            dfs = dfs.join(df, df.datetime == dfs.datetime, how="left").drop(df.datetime)
+            df = df.select(df[datename], df[valname].alias(head))
+            dfs = dfs.join(df, df[datename] == dfs[datename], how="left").drop(df[datename])
 
         return dfs
 
 
 class DictionaryTools(DataframeTools):
-    """Subclass of Dataframe tools to reorganise dataframes into dictionaries."""
+    """Subclass of DataFrame tools to reorganise DataFrames into dictionaries."""
 
     def separate2dict(self, df, label_head, x_head='datetime', y_head='value'):
         """Collect rows which contain the same label in label_head column and put them as a key value pair in

@@ -161,23 +161,31 @@ def merge_duplicate(df, sqlContext):
     return new_df
 
 
-def avg_over_period(df, period="day"):
-    """Given a dataframe with datetime column, average over days, weeks, months or years and return new dataframe.
+def avg_over_period(df, period="day", datename="datetime"):
+    """Given a DataFrame with datetime column, average over a period: days, weeks, months or years.
         Args:
             df (Spark DataFrame): input Spark Dataframe, FORMAT: datetime|value|etc.
             period (str): period for averaging over, EXAMPLES: day, week, month, year
+            datename (str): name of the datetime column
 
         Returns:
             Spark DataFrame: Spark DataFrame whose values are averaged according to period
     """
-    new_df = df.withColumn(period, F.date_trunc(period, df.datetime))
+
+    assert datename in df.schema.names
+    features = df.schema.names[:]
+    features.remove(datename)
+
+    new_df = df.withColumn(period, F.date_trunc(period, df[datename]))
     new_df = new_df \
         .groupBy(period) \
-        .agg(F.avg("value")) \
+        .agg(*[F.avg(feat) for feat in features]) \
         .orderBy(period)
 
-    new_df = new_df.withColumnRenamed("avg(value)", "value")
-    new_df = new_df.withColumnRenamed(period, "datetime")
+    for feat in features:
+        new_df = new_df.withColumnRenamed("avg({})".format(feat), feat)
+
+    new_df = new_df.withColumnRenamed(period, datename)
 
     return new_df
 
