@@ -73,8 +73,11 @@ class ProcessDatasets:
         self.df = df
         self.orig_df = df
 
-    def get_df(self):
-        return self.df
+    def get_df(self, pandas=False):
+        if pandas:
+            return self.df.toPandas()
+        else:
+            return self.df
 
     def get_date(self):
         assert "datetime" in self.df.schema.names, "class member df does not have a datetime column!"
@@ -89,11 +92,11 @@ class ProcessDatasets:
             self.df = transform(self.df)
         print("Dataframe has been transformed")
 
-    def split_df(self, features, label="label", spark_type=False):
+    def split_df(self, features, label="label", pandas=False):
         X = self.df.select(*features)
         y = self.df.select(label)
 
-        if spark_type is False:
+        if pandas:
             X = X.toPandas()
             y = y.toPandas()
 
@@ -163,7 +166,7 @@ def kfold_scores(model, X, y, k=10, return_info=False, v=False):
     if return_info is True:
         return kinfo
 
-
+#
 # def hype_tuning(model, df, features, hype_range, trans, kfolds, graph=True):
 #     rms = []
 #     dataset = ProcessDatasets(df)
