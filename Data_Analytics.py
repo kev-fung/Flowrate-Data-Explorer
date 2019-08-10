@@ -86,13 +86,16 @@ class ProcessDatasets:
         else:
             return self.df.select("datetime")
 
-    def apply_transformations(self, trans, reset_df_to_orig=True):
+    def apply_transformations(self, trans, reset_df_to_orig=True, args=None):
+        if args is None:
+            args = []
+
         if reset_df_to_orig is True:
             self.df = self.orig_df
             print("\nReset dataframe to original")
 
         for transform in trans:
-            self.df = transform(self.df)
+            self.df = transform(self.df, *args)
         print("Dataframe has been transformed")
 
     def split_df(self, features, label="label", pandas=False):
