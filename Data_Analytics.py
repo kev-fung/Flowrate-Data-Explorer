@@ -79,9 +79,12 @@ class ProcessDatasets:
         else:
             return self.df
 
-    def get_date(self):
+    def get_date(self, pandas=False):
         assert "datetime" in self.df.schema.names, "class member df does not have a datetime column!"
-        return self.df.select("datetime")
+        if pandas:
+            return self.df.select("datetime").toPandas()
+        else:
+            return self.df.select("datetime")
 
     def apply_transformations(self, trans, reset_df_to_orig=True):
         if reset_df_to_orig is True:
