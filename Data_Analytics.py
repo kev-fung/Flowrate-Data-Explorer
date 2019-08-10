@@ -116,7 +116,7 @@ def aic(y, y_pred, k):
     return 2 * k - 2 * np.log(sse)
 
 
-def kfold_scores(model, X, y, k=10, return_info=False, v=False):
+def kfold_scores(model, X, y, k=10, return_info=False, v=False, v1=True):
     """ X: entire dataset of features
         y: entire dataset of labels
     """
@@ -152,7 +152,7 @@ def kfold_scores(model, X, y, k=10, return_info=False, v=False):
             print("AIC Estimator: ", aic_)
 
         # RMS Estimator:
-        rms_ = ((kf_lab_datasets[n][1] - y_val) * 2).mean() * .5
+        rms_ = ((kf_lab_datasets[n][1] - y_val) ** 2).mean() * .5
         sum_rms += rms_
         kinfo["rms"].append(rms_)
         if v:
@@ -160,11 +160,12 @@ def kfold_scores(model, X, y, k=10, return_info=False, v=False):
 
     avg_aic = sum_aic / m
     avg_rms = sum_rms / m
-    print("\nModel Evaluation")
-    print("-----------------")
-    print("Number of folds: ", k)
-    print("Averaged AIC: ", avg_aic)
-    print("Averaged RMS: ", avg_rms)
+    if v1:
+        print("\nModel Evaluation")
+        print("-----------------")
+        print("Number of folds: ", k)
+        print("Averaged AIC: ", avg_aic)
+        print("Averaged RMS: ", avg_rms)
 
     kinfo["eval_metrics"].append(avg_aic)
     kinfo["eval_metrics"].append(avg_rms)
@@ -172,27 +173,25 @@ def kfold_scores(model, X, y, k=10, return_info=False, v=False):
     if return_info is True:
         return kinfo
 
-#
-# def hype_tuning(model, df, features, hype_range, trans, kfolds, graph=True):
-#     rms = []
-#     dataset = ProcessDatasets(df)
-#
-#     for param in hype_range:
-#         dataset.apply_transformations(trans)
-#         X, y = dataset.split_df(features)
-#         X, y = X, np.squeeze(y)
-#
-#         kinfo = kfold_scores(model, X, y, k=kfolds, return_info=True)
-#         rms.append(kinfo["eval_metrics"][1])
-#
-#     if graph:
-#         fig, ax = plt.subplots(1, 1, figsize=(24, 8))
-#         ax.plot(upper, rms, "x-", label="hyp tune")
-#         ax.set_xlabel("Parameter Range", fontsize=16)
-#         ax.set_ylabel("RMS Error", fontsize=16)
-#         ax.set_title("Varying Parameter against RMS Error of model", fontsize=16)
-#         ax.legend(loc="best")
-#         ax.grid(True)
-#         display(fig)
-#
-#     return rms
+
+def hype_tune(dataset, method, method_args, tune_params, features, estimator):
+    accuracy_metric = []
+
+    dataset.set_df(dataset.df)
+
+    for tune in tune_params:
+        in_arg = []
+        for arg in method_args:
+            if arg == "TUNE":
+                in_arg.append(tune)
+            else:
+                in_arg.append(arg)
+
+        dataset.apply_transformations([method], args=in_arg)
+        X, y = dataset.split_df(features, pandas=True)
+        y = np.squeeze(y)
+
+        kinfo = kfold_scores(estimator, X, y, k=10, return_info=True, v1=False)
+        accuracy_metric.append(kinfo["eval_metrics"][1])
+
+    return accuracy_metric
