@@ -95,7 +95,7 @@ class ProcessDatasets:
             print("\nReset dataframe to original")
 
         for transform in trans:
-            self.df = transform(self.df, *args)
+            self.df = transform(*([self.df] + args))
         print("Dataframe has been transformed")
 
     def split_df(self, features, label="label", pandas=False):
