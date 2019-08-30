@@ -26,7 +26,7 @@ def data_frame_names():
 
 @pytest.fixture(scope="session")
 def data_frames(spark_context, sql_context, data_frame_names):
-    data_frames = [(name, pandas.read_csv("resource/{}.csv".format(name))) for name in data_frame_names]
+    data_frames = [(name, pandas.read_csv("resources/{}.csv".format(name))) for name in data_frame_names]
     spark_data_frames = {name: create_spark_data_frame(sql_context, data_frame) for (name, data_frame) in data_frames}
     return spark_data_frames
 

@@ -1,7 +1,7 @@
 import pytest
 import pandas as pd
 from mlflowrate.tests.conftest import create_spark_data_frame
-from mlflowrate.data.classes.clean import DataCleaner
+from mlflowrate.classes.subclasses.clean import DataCleaner
 
 
 @pytest.fixture()

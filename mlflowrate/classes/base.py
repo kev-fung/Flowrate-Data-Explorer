@@ -39,7 +39,7 @@ class BaseData:
 
         """
         for data in args:
-            assert data in list(self.dfs.keys()) + list(self.sets.keys()), "{} does not exist in class".format(data)
+            assert data in self.dfs.keys(), "{} does not exist in class".format(data)
 
             self.dfs[data].cache()
 
@@ -47,7 +47,7 @@ class BaseData:
                 for feat, df in self.dicts[data].items():
                     df.cache()
 
-    def _dict2df(self, ow_dict, sort=False, drop_nulls=True):
+    def _dict2df(self, ow_dict, datename="datetime", valname="value", sort=True, drop_nulls=True):
         """Convert a dictionary of timeseries features into a Spark DataFrame of columns of these features.
         Each DataFrame in the dictionary must have the same formatted datetime columns and sizes!
         Args:
@@ -59,8 +59,8 @@ class BaseData:
             Spark DataFrame: DataFrame with columns of features
         """
         for df in ow_dict.values():
-            assert "datetime" in df.columns, "Inconsistent datetime column names"
-            assert "value" in df.columns, "Inconsistent value column names"
+            assert datename in df.schema.names, "Inconsistent datetime column names"
+            assert valname in df.schema.names, "Inconsistent value column names"
 
         if sort:
             # Must pull the smallest sampled kv pair first:
@@ -71,12 +71,12 @@ class BaseData:
             smallest_feat = counter[str(min([int(i) for i in list(counter.keys())]))]
 
             dfs = ow_dict[smallest_feat]
-            dfs = dfs.select(dfs["datetime"], dfs["value"].alias(smallest_feat))
+            dfs = dfs.select(dfs[datename], dfs[valname].alias(smallest_feat))
 
         else:
             # Assume everything the same size, just pull the first kv pair in dict.
             dfs = ow_dict[list(ow_dict.keys())[0]]
-            dfs = dfs.select(dfs["datetime"], dfs["value"].alias(list(ow_dict.keys())[0]))
+            dfs = dfs.select(dfs[datename], dfs[valname].alias(list(ow_dict.keys())[0]))
 
         for i, (head, df) in enumerate(ow_dict.items()):
             if sort:
@@ -86,8 +86,8 @@ class BaseData:
                 if i == 0:
                     continue
 
-            df = df.select(df["datetime"], df["value"].alias(head))
-            dfs = dfs.join(df, df["datetime"] == dfs["datetime"], how="left").drop(df["datetime"])
+            df = df.select(df[datename], df[valname].alias(head))
+            dfs = dfs.join(df, df[datename] == dfs[datename], how="left").drop(df[datename])
 
         #       precautionary measure to remove any possible nulls from the joining.
         if drop_nulls:
@@ -115,18 +115,18 @@ class BaseData:
             ow_dict[feat] = df.select(df["datetime"], df[feat].alias("value"))
         return ow_dict
 
-    def plot_ts(self, title, dicts_dfs, third_axis_dfs=None, marker_dict=None, plot_dataframes=False):
+    def plot(self, title, dicts_dfs, third_axis=None, marker_dict=None, is_sets=False):
         """Plot multiple timeseries Spark DataFrames onto a figure, x axis = time, y axis = value.
         Args:
             title (str): Name of Spark DataFrame
             dicts_dfs (dict): {data: [WHP, DHP], data: [DHT, Qliq]}
-            third_axis_dfs (dict): {data: [WHP, DHP], data: [DHT, Qliq]}
+            third_axis (dict): {data: [WHP, DHP], data: [DHT, Qliq]}
             marker_dict (dict): dict of lists of dataframes with desired marker styles {marker:list}
 
         Returns:
             None
         """
-        if plot_dataframes:
+        if is_sets:
             # functionality intended for visualising sets
             # where we only have dataframes
             for data in dicts_dfs.keys():
@@ -136,11 +136,11 @@ class BaseData:
                 # Transform dataframe to dictionary format
                 self.dicts[data] = self._df2dict(self.sets[data])
 
-            if third_axis_dfs:
-                for data in third_axis_dfs.keys():
+            if third_axis:
+                for data in third_axis.keys():
                     assert data in self.sets.keys(), "data does not exist in sets"
 
-                for data in third_axis_dfs.keys():
+                for data in third_axis.keys():
                     # Transform dataframe to dictionary format
                     self.dicts[data] = self._df2dict(self.sets[data])
 
@@ -160,14 +160,14 @@ class BaseData:
 
         axs.legend(loc="best")
 
-        if third_axis_dfs:
-            for data in third_axis_dfs.keys():
+        if third_axis:
+            for data in third_axis.keys():
                 assert data in self.dicts.keys(), "data does not exist in dictionary format"
 
             mpl.rcParams['axes.prop_cycle'] = mpl.cycler(color=self.CB_color_cycle)
 
             ax2 = axs.twinx()  # instantiate a second axes that shares the same x-axis
-            ax2 = self._plot(ax2, third_axis_dfs, marker_dict)
+            ax2 = self._plot(ax2, third_axis, marker_dict)
 
             ax2.set_ylabel('value')  # we already handled the x-label with ax1
             ax2.tick_params(axis='y', labelcolor="black")

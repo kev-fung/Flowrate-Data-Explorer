@@ -17,19 +17,13 @@ class DataCleaner(BaseData):
             self._track_org[data] = False
 
     def add_data(self, add_dfs):
-        """Add a dictionary of new dfs into the class: {name:df, name:df, name:df etc.}
-        :param add_dfs:
-        """
+        """Add a dictionary of new dfs into the class: {name:df, name:df, name:df etc.}"""
         for name, df in add_dfs.items():
             assert name not in self.dfs.keys(), "there is already data with the same name! {}".format(name)
             self.dfs[name] = df
             self._track_org[name] = False
 
     def status(self, data=None):
-        """
-        Description of dfs
-        :param data:
-        """
         if data is not None:
             assert data in self.dfs.keys()
 
@@ -42,10 +36,12 @@ class DataCleaner(BaseData):
             print("Number of samples with null across columns in dictionary:")
             for feat, df in self.dicts[data].items():
                 samples = df.count()
-                print("{0}  |  Samples {1}  |  Nulls {2}"
-                      "  |  Duplicates {3}".format(feat, samples,
-                                                   df.where(df["value"].isNull() == True).count(),
-                                                   samples - df.dropDuplicates(["datetime"]).count()))
+                print("{0}  |  Samples {1}  |  Nulls {2}  |  Duplicates {3}".format(feat, samples,
+                                                                                    df.where(df[
+                                                                                                 "value"].isNull() == True).count(),
+                                                                                    samples - df.dropDuplicates(
+                                                                                        ["datetime"]).count()
+                                                                                    ))
         else:
             print("\nMetadata")
             print("~~~~~~~~~~~~~~~~~~")
@@ -55,22 +51,12 @@ class DataCleaner(BaseData):
                 print(" {0}  |  {1} ".format(name, org))
 
     def set_organised(self, name):
-        """
-        Set data which is organised to be tracked and put into the out_dfs/dicts for the next phase
-        :param name:
-        """
+        """data which is organised will be put into the out_dfs/dicts for the next phase """
 
         assert name in self.dfs.keys(), "name of data does not exist!"
         self._track_org[name] = True
 
     def merge_data(self, newname, first, second, axis=0):
-        """
-        Merge two given dfs
-        :param newname: name of new dfs
-        :param first: name of first dfs
-        :param second: name of second dfs
-        :param axis: axis on which to merge (0: bottom append, 1:left join)
-        """
         assert axis in [0, 1], "axis must be either 0 or 1"
         assert first in self.dfs.keys(), "name of first data does not exist"
         assert second in self.dfs.keys(), "name of second data does not exist"
@@ -86,16 +72,6 @@ class DataCleaner(BaseData):
 
     def clean_data(self, data, null_col=None, remove_nulls=False, char_col=None, remove_char=None, avg_over=None,
                    is_dict=False):
-        """
-        Helper function to clean dirty and organised dfs
-        :param data: the dfs to be cleaned
-        :param null_col: selected column to remove null values
-        :param remove_nulls: null remover flag
-        :param char_col:
-        :param remove_char:
-        :param avg_over:
-        :param is_dict:
-        """
         assert data in self.dfs.keys(), "data must be a spark dataframe stored within dfs"
         assert "datetime" in self.dfs[data].columns, "no datetime columns can be found in dataframe"
 
@@ -135,16 +111,6 @@ class DataCleaner(BaseData):
         return new_df
 
     def edit_col(self, data, feature, **kwargs):
-        """
-        Edit feature columns for a particular dfs. Currently two options are available
-            casting (typ): cast a column dtype value to a different type
-            renaming (newname): rename the column name
-        :param data: the dfs to edit
-        :param feature: the selected feature column
-        :param kwargs: keyword arguments for editing:
-                        typ: new column type
-                        newname: new column name
-        """
         assert data in self.dicts.keys(), "data in dictionary format not found"
         if not bool(kwargs.keys()):
             print("No options were passed in")
@@ -168,37 +134,21 @@ class DataCleaner(BaseData):
             print("No options were given")
 
     def drop_col(self, data, *features):
-        """
-        Drop one/more columns from a given dfs
-        :param data:
-        :param features:
-        """
         assert data in self.dicts.keys(), "data in dictionary format not found"
         self.dfs[data] = self.dfs[data].select(*[feat for feat in self.dfs[data].columns if feat not in features])
         self.dicts[data] = {feat: df for feat, df in self.dicts[data].items() if feat not in features}
 
     def select_col(self, data, *features):
-        """
-        Select one/more columns from a given dfs
-        :param data:
-        :param features:
-        """
         assert data in self.dicts.keys(), "data in dictionary format not found"
         self.dfs[data] = self.dfs[data].select("datetime", *features)
         self.dicts[data] = {feat: df for feat, df in self.dicts[data].items() if feat in features}
 
     def organise_data(self, name, dfmat, **kwargs):
-        """
-
-        :param name:
-        :param dfmat:
-        :param kwargs:
-        """
         assert name in self.dfs.keys(), "there is no data with the name {}".format(name)
         assert dfmat in self._formats, "format does not exist! select 'date_tag_val_col', 'mult_col', dict_col"
+        # Will only return a perfect df if the data features had exactly the same number of samples
 
-        if dfmat == 'date_tag_val_col':  # Will only return a perfect df if the data features
-            # had exactly the same number of samples
+        if dfmat == 'date_tag_val_col':
             assert len(self.dfs[name].columns) == 3, "DataFrame does not have correct number of columns!"
             assert "tag" in self.dfs[name].columns, "No 'tag' column"
             assert "datetime" in self.dfs[name].columns, "No 'datetime' column"
@@ -262,10 +212,6 @@ class DataCleaner(BaseData):
             print("Unusual Error!")
 
     def get_data(self):
-        """
-        Get dfs/dicts of data which have been organised
-        :return:
-        """
         out_dfs = {}
         out_dicts = {}
         for data, org in self._track_org.items():
@@ -276,12 +222,6 @@ class DataCleaner(BaseData):
         return out_dfs, out_dicts
 
     def _change_sensor_names(self, in_dict, decode):
-        """
-
-        :param in_dict:
-        :param decode:
-        :return:
-        """
         new_dict = {}
         for key, val in in_dict.items():
             for k, new_key in decode.items():
