@@ -1,3 +1,8 @@
+"""
+Kevin Fung
+Github: kkf18
+"""
+
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 import matplotlib as mpl
