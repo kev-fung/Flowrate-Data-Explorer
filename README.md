@@ -1,5 +1,7 @@
-# mlflowrate: A data integration and machine learning package for predicting liquid flow rates
-### Kevin Fung
+# ACSE 9: Independent Research Project
+## MSC Applied Computational Science and Engineering
+## mlflowrate: A data integration and machine learning package for predicting liquid flow rates
+### Author: Kevin Fung
 ### CID: 01098510
 ### Email: kkf18@ic.ac.uk
 
