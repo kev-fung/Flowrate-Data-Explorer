@@ -15,7 +15,7 @@ The package is designed to run within an Azure Databricks environment.
 For local installations, move into the source folder, mlflowrates, then pip install the package.
 
 ## Usage
-Usage for the software is provided in the form of a notebook, to allow users to understand how to use the code.
+Usage for the software is provided in the form of a notebook, EXAMPLE.ipynb, to allow users to understand how to use the code.
 
 ## License
 MIT Licence
