@@ -1,38 +1,29 @@
-# Oilfield Scale Detection with Machine Learning
-### Developed Package: SparkDEA (Data Exploration Analysis)
-
-This project aims to investigate the scaling of oilwells and its detection given large quantitites of well data.
-The first objective is to develop a Python Package to organise, explore, and model data in Spark SQL DataFrames for ease of exploring and analysing Spark data.
-The second objective is to investigate the problem in an Azure Databricks Notebook Environment with classified data residing in the Azure DataLake using the developed package. Both objectives are completed concurrently because the investigations will require constantly new methods for analysis from the package.
+# mlflowrate: A data integration and machine learning package for predicting liquid flow rates
+### Kevin Fung
+### CID: 01098510
+### Email: kkf18@ic.ac.uk
 
 This repository contains (To be updated):
 1. Spark Data Modules
 2. Spark Data Tests
 3. Workflow Notebook with Investigations
 
-
-## Table of Contents
-
-- [Installation](#installation)
-- [Usage](#usage)
-- [Author](#contributers)
-- [License](#license)
-- [Version Log](#version-control-log-history)
+## Data Privacy
+Access to data is restricted due to company legalities.
 
 ## Installation
+The package is designed to run within an Azure Databricks environment.
+For local installations, move into the source folder, mlflowrates, then pip install the package.
 
 ## Usage
-
-## Contributers
+Usage for the software is provided in the form of a notebook, to allow users to understand how to use the code.
 
 ## License
 
-## Version Log
 
+## Version Log
 Due to company reasons and data privacy control, version controlling approach may change over time. 
 A log below will keep track of these changes.
-
-
 
 | Log Date  | Comment |
 | ------------- | ------------- |
