@@ -1,3 +1,9 @@
+"""
+Kevin Fung
+Github: kkf18
+"""
+
+from mlflowrate.classes.subclasses.clean import DataCleaner
 from mlflowrate.classes.subclasses.datasets import DataSets
 from mlflowrate.classes.subclasses.explore import DataExplore
 
@@ -14,7 +20,7 @@ class WorkFlow:
         self.flow_datasets = {}
 
         self._track_workflow = {"data phase": True, "dataset phase": False, "explore phase": False}
-        self.data = Data(dfs)
+        self.data = DataCleaner(dfs)
         self.datasets = None
         self.dataexplore = None
         self.explores = []

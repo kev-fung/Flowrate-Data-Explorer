@@ -1,9 +1,9 @@
 from setuptools import setup
 
 setup(
-    name='old',  # Name of package, required
+    name='mlflowrate',  # Name of package, required
     version='1.0.0',  # Version number, required
-    packages=['old'],  # directories to install, required
+    packages=['mlflowrate'],  # directories to install, required
     # One-line description or tagline of what your project does
     description='A data science package for oil well flow rate prediction.',  # Optional
     url='https://github.com/msc-acse/acse-9-independent-research-project-kkf18',  # Optional

@@ -1,3 +1,8 @@
+"""
+Kevin Fung
+Github: kkf18
+"""
+
 import pytest
 import pandas
 import os

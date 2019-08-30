@@ -1,4 +1,9 @@
+"""
+Kevin Fung
+Github: kkf18
+"""
 from mlflowrate.classes.base import BaseData
+
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt

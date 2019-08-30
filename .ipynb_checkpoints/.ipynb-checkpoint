@@ -178,7 +178,7 @@
    "metadata": {},
    "outputs": [],
    "source": [
-    "# \n",
+    "# collect datframes\n",
     "datasets = flow.dataexplore.get_datasets()\n",
     "eval_preds = flow.dataexplore.fitpredict_naivemodels(datasets[\"OrigSep_2018\"], datasets[\"OrigField_2018\"], eval_all=True)\n",
     "flow.dataexplore.plotmodels(datasets[\"OrigSep_2018\"], datasets[\"OrigField_2018\"], eval_preds)"

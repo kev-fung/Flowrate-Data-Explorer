@@ -1,3 +1,8 @@
+"""
+Kevin Fung
+Github: kkf18
+"""
+
 import pytest
 import numpy as np
 from mlflowrate.classes.subclasses.explore import Result
