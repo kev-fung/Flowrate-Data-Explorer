@@ -3,10 +3,7 @@
 ### CID: 01098510
 ### Email: kkf18@ic.ac.uk
 
-This repository contains (To be updated):
-1. Spark Data Modules
-2. Spark Data Tests
-3. Workflow Notebook with Investigations
+This software is designed for processing raw well data and producing liquid rate predictions given a range of machine learning models. 
 
 ## Data Privacy
 Access to data is restricted due to company legalities.
@@ -19,7 +16,7 @@ For local installations, move into the source folder, mlflowrates, then pip inst
 Usage for the software is provided in the form of a notebook, to allow users to understand how to use the code.
 
 ## License
-
+MIT Licence
 
 ## Version Log
 Due to company reasons and data privacy control, version controlling approach may change over time. 
