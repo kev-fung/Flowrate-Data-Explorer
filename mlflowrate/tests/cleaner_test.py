@@ -6,7 +6,7 @@ Github: kkf18
 import pytest
 import pandas as pd
 from mlflowrate.tests.conftest import create_spark_data_frame
-from mlflowrate.classes.subclasses.clean import DataCleaner
+from mlflowrate.classes.subclasses.clean import Data
 
 
 @pytest.fixture()

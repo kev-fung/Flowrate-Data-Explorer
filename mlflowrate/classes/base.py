@@ -1,6 +1,11 @@
-"""
-Kevin Fung
-Github: kkf18
+"""Kevin Fung - Github Alias: kkf18
+
+Private parent class for workflow classes.
+This module is intended to contain key features that will be used across all workflow classes.
+
+Todo:
+    * None
+
 """
 
 import matplotlib.pyplot as plt
@@ -8,24 +13,42 @@ import matplotlib.dates as mdates
 import matplotlib as mpl
 
 
-class BaseData:
+class Base:
+    """Parent class for workflow classes.
+
+    Currently holds public data attributes, reorganisation methods, and plotting methods.
+
+    Attributes:
+        dfs (dict): Dictionary of different Spark DataFrames holding mixed features of well data.
+        dicts (dict): Dictionary of different organised dictionaries of single featured well data.
+        sets (dict): Dictionary of different Spark DataFrames created by the user.
+        datasets (dict): Dictionary of different Dset objects that hold the datasets for machine learning.
+        CB_color_cycle (dict): Matplotlib plotting colour cycle.
+
+    """
 
     def __init__(self, dfs=None, dicts=None, datasets=None):
-        """
-        Not all child classes will require these data dictionaries.
+        """Initialise data attributes used for relevant workflow classes.
+
+        The first Base() instantiation from the Data() class should generate a corresponding dicts         attribute regardless of sample inconsistency in dfs.
+
+        Args:
+            dfs (dict): Dictionary of different Spark DataFrames, a "datetime" column is expected.
+            dicts (dict): Dictionary of different organised well data dictionaries.
+            datasets (dict): Dictionary of Dset objects.
+
         """
         if dfs is None:
             self.dfs = {}
         else:
             self.dfs = dfs
             self.dicts = {}
-            # The first instantiation with DataFrames should also generate a corresponding grouped dict format.
-            # Regardless of sample inconsistency.
             for data in self.dfs.keys():
                 self.dicts[data] = self._df2dict(self.dfs[data])
 
         if (dfs is None) & (dicts is None):
             self.dicts = {}
+
         if (dfs is None) & (dicts is not None):
             self.dicts = dicts
 
@@ -34,13 +57,19 @@ class BaseData:
         else:
             self.datasets = datasets
 
+        self.sets = {}
+
         self.CB_color_cycle = ['#a65628', '#984ea3',
                                '#999999', '#e41a1c', '#dede00']
 
-        self.sets = {}
-
     def cache_data(self, *args):
-        """
+        """Wrapper method for Spark Caching DataFrames into the running cluster.
+
+        Args:
+            *args: argument list of key names present in the dfs sttribute.
+
+        Returns:
+            Cached Spark DataFrame in cluster framework.
 
         """
         for data in args:
@@ -53,8 +82,16 @@ class BaseData:
                     df.cache()
 
     def _dict2df(self, ow_dict, datename="datetime", valname="value", sort=True, drop_nulls=True):
-        """Convert a dictionary of timeseries features into a Spark DataFrame of columns of these features.
+        """Generate a Spark DataFrame which merges all separated DataFrames from the passed organised dictionary.
+
         Each DataFrame in the dictionary must have the same formatted datetime columns and sizes!
+
+        Example:
+            Passing in an organised dictionary:
+                {val1: |datetime|val1|, val2: |datetime|val2|}
+            Generates a Spark DataFrame containing:
+                |datetime|val1|val2|
+
         Args:
             ow_dict (dict): Input dictionary of features
             datename (str): Name of the column to join by
@@ -62,6 +99,7 @@ class BaseData:
 
         Returns:
             Spark DataFrame: DataFrame with columns of features
+
         """
         for df in ow_dict.values():
             assert datename in df.schema.names, "Inconsistent datetime column names"
@@ -92,24 +130,28 @@ class BaseData:
                     continue
 
             df = df.select(df[datename], df[valname].alias(head))
-            dfs = dfs.join(df, df[datename] == dfs[datename], how="left").drop(df[datename])
+            dfs = dfs.join(df, df[datename] == dfs[datename], how="left").drop(df[datename]).orderBy(datename)
 
-        #       precautionary measure to remove any possible nulls from the joining.
+        # precautionary measure to remove any possible nulls from the joining.
         if drop_nulls:
             dfs = dfs.na.drop()
-
         return dfs
 
     def _df2dict(self, df):
-        """Convert a Spark DataFrame of columns of timeseries features into an organised dictionary.
-            EXAMPLE:
-                ow_dict = {feature name : timeseries dataframe}
+        """Generate an organised dictionary containing separated single featured Spark DataFrames from a Spark DataFrame of timeseries features.
+
+        Example:
+            Passing in a Spark DataFrame containing:
+                |datetime|val1|val2|
+            Generates an organised dictionary:
+                {val1: |datetime|val1|, val2: |datetime|val2|}
+
         Args:
-            df (Spark DataFrame): input Spark DataFrame with different features
-            date_head (str): column name of datetime in Spark DataFrame
+            df (obj): input Spark DataFrame with different features
 
         Returns:
             Dict: organised dictionary of features from Spark DataFrame
+
         """
         assert "datetime" in df.columns, "no datetime column in given DataFrame!"
 
@@ -117,19 +159,21 @@ class BaseData:
         for feat in df.columns:
             if feat == "datetime":
                 continue
-            ow_dict[feat] = df.select(df["datetime"], df[feat].alias("value"))
+            ow_dict[feat] = df.select(df["datetime"], df[feat].alias("value")).orderBy("datetime")
         return ow_dict
 
     def plot(self, title, dicts_dfs, third_axis=None, marker_dict=None, is_sets=False):
         """Plot multiple timeseries Spark DataFrames onto a figure, x axis = time, y axis = value.
+
         Args:
             title (str): Name of Spark DataFrame
-            dicts_dfs (dict): {data: [WHP, DHP], data: [DHT, Qliq]}
-            third_axis (dict): {data: [WHP, DHP], data: [DHT, Qliq]}
+            dicts_dfs (dict): example input: {data: [WHP, DHP], data: [DHT, Qliq]}
+            third_axis (dict): example input: {data: [WHP, DHP], data: [DHT, Qliq]}
             marker_dict (dict): dict of lists of dataframes with desired marker styles {marker:list}
 
         Returns:
-            None
+            Matplotlib figure and axes objects for displaying in notebook.
+
         """
         if is_sets:
             # functionality intended for visualising sets
@@ -154,13 +198,13 @@ class BaseData:
 
         plt.gca().set_prop_cycle(None)
 
-        fig, axs = plt.subplots(1, 1, figsize=(24, 8))
+        fig, axs = plt.subplots(1, 1, figsize=(12, 8))
         axs = self._plot(axs, dicts_dfs, marker_dict)
-        axs.set_title(title, fontsize=16)
-        axs.set_xlabel("datetime", fontsize=16)
-        axs.set_ylabel("value", fontsize=16)
+        axs.set_title(title, fontsize=20)
+        axs.set_xlabel("datetime", fontsize=20)
+        axs.set_ylabel("value", fontsize=20)
 
-        axs.xaxis.set_major_formatter(mdates.DateFormatter("%Y-%m-%d %H:%M"))
+        axs.xaxis.set_major_formatter(mdates.DateFormatter("%Y-%m-%d"))
         axs.xaxis.set_minor_formatter(mdates.DateFormatter("%Y-%m-%d"))
 
         axs.legend(loc="best")
@@ -187,6 +231,7 @@ class BaseData:
         return fig, axs
 
     def _plot(self, ax, dict_dfs, marker_dict):
+        """Plot helper function: iteratively plot different Spark DataFrames on the same figure"""
         for data, feat_list in dict_dfs.items():
             for feat in feat_list:
                 ts_pd = self.dicts[data][feat].orderBy("datetime").toPandas()

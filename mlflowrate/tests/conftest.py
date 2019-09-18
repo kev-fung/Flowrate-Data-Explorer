@@ -6,7 +6,7 @@ Github: kkf18
 import pytest
 import pandas
 import os
-from mlflowrate.classes.base import BaseData
+from mlflowrate.classes.base import Base
 from pyspark import SparkContext, SQLContext, SparkConf
 
 
