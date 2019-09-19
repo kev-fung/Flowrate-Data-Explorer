@@ -35,7 +35,7 @@ Finally, the user can now progress onto the 3 data science stages, for example:
 
 **Check the user documentations for the features and descriptions!**
 
-### Things to note:
+### Important things to note:
 
 1. **Data Formats**  
   Two types of common data formats are targeted for data integration:
@@ -60,20 +60,22 @@ Finally, the user can now progress onto the 3 data science stages, for example:
       The function   `organise_data()`    also organises this data for integrating into the mlflowrate pipeline.
 
 2. **Understanding how to integrate and clean the data**  
-  A problem with oil well data given in the "Tagname Format" is that we can have incontiguous features.   
-  E.g. temperature has 365 samples spanning from 2016-2017, but pressure has 720 samples spanning from 2016-2018.  
-  This means when the two features are combined into a DataFrame, temperature will contain an extra 365 nulls to fill up the empty space to keep the data symmetry.
+  A problem with oil well data given in the "Tagname Format" is that we can have incontiguous features.
   
-  mlflowrate organises these incontiguous data into two formats for cleaning and integration:
-    1. Spark DataFrame Format
-    2. Dictionary Format
-  
-  The Dictionary Format separates out the individual features and collected them into their own key-value pairs in a dictionary.  
-  For example:
-  
-  Dictionary = {temperature: | datetime | value |,  pressure: | datetime | value |}
-  
-  Every data passed into the software will have a Spark DataFrame Format, and a Dictionary Format.
-  Using any of the cleaning methods in the package will change both of these formats.
-  
-  It is the users job to produce a contiguous and clean Spark DataFrame format for the next stage. The    `.status()`    method enables users to check for duplicates, nulls and sample sizes for assistance.
+      E.g: Temperature has 365 samples spanning from 2016-2017, but pressure has 720 samples spanning from 2016-2018.  
+
+      This means when the two features are combined into a DataFrame, temperature will contain an extra 365 nulls to fill up the empty space to keep the data symmetry.  
+
+      mlflowrate organises these incontiguous data into two formats for cleaning and integration:  
+        1. **Spark DataFrame Format**  
+        2. **Dictionary Format**  
+
+      The Dictionary Format separates out the individual features and collected them into their own key-value pairs in a dictionary.  
+      For example:
+
+          Dictionary = {temperature: | datetime | value |,  pressure: | datetime | value |}
+
+      Every data passed into the software will have a Spark DataFrame Format, and a Dictionary Format.
+      Using any of the cleaning methods in the package will change both of these formats.
+
+      It is the users job to produce a contiguous and clean Spark DataFrame format for the next stage. The    `.status()`    method enables users to check for duplicates, nulls and sample sizes for assistance.
