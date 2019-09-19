@@ -1,0 +1,345 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>main module &mdash; mlflowrate 0.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="submodule" href="integrate.html" />
+    <link rel="prev" title="mlflowrate User Manual" href="../man/manual.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> mlflowrate
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Guides:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../man/manual.html">User Manual</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Documentation:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">workflow</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#workflow">workflow</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="integrate.html">integrate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="datasets.html">datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="explore.html">explore</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Backend:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="base.html">base</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Housekeeping:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Licence.html">Licence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="requirements.html">Requirements</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">mlflowrate</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>main module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/mods/workflow.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="main-module">
+<h1>main module<a class="headerlink" href="#main-module" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="workflow">
+<h2>workflow<a class="headerlink" href="#workflow" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-mlflowrate.workflow"></span><p>Kevin Fung - Github Alias: kkf18</p>
+<p>WorkFlow user-level parent class.
+This module contains the pipeline management of workflow subclasses and manages the flow of manipulated data.</p>
+<p class="rubric">Example</p>
+<p>flow = WorkFlow(data_dictionary)
+flow.data.clean(datakey)
+flow.nextphase()</p>
+<dl class="class">
+<dt id="mlflowrate.workflow.WorkFlow">
+<em class="property">class </em><code class="sig-prename descclassname">mlflowrate.workflow.</code><code class="sig-name descname">WorkFlow</code><span class="sig-paren">(</span><em class="sig-param">dfs</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflowrate.workflow.WorkFlow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pipeline for the management of workflow subclasses.</p>
+<p>Instantiate workflow subclasses and manipulate using these objects.</p>
+<dl class="attribute">
+<dt id="mlflowrate.workflow.WorkFlow.flow_results">
+<code class="sig-name descname">flow_results</code><a class="headerlink" href="#mlflowrate.workflow.WorkFlow.flow_results" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dictionary of different Results objects.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mlflowrate.workflow.WorkFlow.flow_dfs">
+<code class="sig-name descname">flow_dfs</code><a class="headerlink" href="#mlflowrate.workflow.WorkFlow.flow_dfs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dictionary of different Spark DataFrames containing mixed well data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mlflowrate.workflow.WorkFlow.flow_dicts">
+<code class="sig-name descname">flow_dicts</code><a class="headerlink" href="#mlflowrate.workflow.WorkFlow.flow_dicts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dictionary of different organised dictionaries of mixed well data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mlflowrate.workflow.WorkFlow.flow_datasets">
+<code class="sig-name descname">flow_datasets</code><a class="headerlink" href="#mlflowrate.workflow.WorkFlow.flow_datasets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dictionary of different Dset objects.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mlflowrate.workflow.WorkFlow._track_workflow">
+<code class="sig-name descname">_track_workflow</code><a class="headerlink" href="#mlflowrate.workflow.WorkFlow._track_workflow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tracks the workflow.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mlflowrate.workflow.WorkFlow.integrate">
+<code class="sig-name descname">integrate</code><a class="headerlink" href="#mlflowrate.workflow.WorkFlow.integrate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Instantiated Integrate class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>obj</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mlflowrate.workflow.WorkFlow.datasets">
+<code class="sig-name descname">datasets</code><a class="headerlink" href="#mlflowrate.workflow.WorkFlow.datasets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Instantiated DataSets class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>obj</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mlflowrate.workflow.WorkFlow.explore">
+<code class="sig-name descname">explore</code><a class="headerlink" href="#mlflowrate.workflow.WorkFlow.explore" title="Permalink to this definition">¶</a></dt>
+<dd><p>Instantiated Explore class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>obj</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflowrate.workflow.WorkFlow.next_phase">
+<code class="sig-name descname">next_phase</code><span class="sig-paren">(</span><em class="sig-param">repeat_phase=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflowrate.workflow.WorkFlow.next_phase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Instantiate the next phase of the data pipeline.</p>
+<p>Users must call this function to be able to use the subsequent backend.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>repeat_phase</strong> (<em>bool</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflowrate.workflow.WorkFlow.status">
+<code class="sig-name descname">status</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mlflowrate.workflow.WorkFlow.status" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display the current stage in the data pipeline.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="integrate.html" class="btn btn-neutral float-right" title="submodule" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../man/manual.html" class="btn btn-neutral float-left" title="mlflowrate User Manual" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Kevin Fung
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,429 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>submodule &mdash; mlflowrate 0.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="submodule" href="datasets.html" />
+    <link rel="prev" title="main module" href="workflow.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> mlflowrate
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Guides:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../man/manual.html">User Manual</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Documentation:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="workflow.html">workflow</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">integrate</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#integrate">Integrate</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="datasets.html">datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="explore.html">explore</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Backend:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="base.html">base</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Housekeeping:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Licence.html">Licence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="requirements.html">Requirements</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">mlflowrate</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>submodule</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/mods/integrate.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="submodule">
+<h1>submodule<a class="headerlink" href="#submodule" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="integrate">
+<h2>Integrate<a class="headerlink" href="#integrate" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-mlflowrate.backend.subclasses.integrate"></span><p>Kevin Fung - Github Alias: kkf18</p>
+<p>Stage 1: nested class to integrate and clean data.
+This module contains the integration and cleaning features for messy oil well data.
+Imported csv data must be in one of two formats:</p>
+<blockquote>
+<div><p>Format1: <a href="#id1"><span class="problematic" id="id2">|datetime|tagname|value|</span></a>
+Format2: <a href="#id3"><span class="problematic" id="id4">|datetime|feature1|feature2|feature3|</span></a></p>
+</div></blockquote>
+<dl class="class">
+<dt id="mlflowrate.backend.subclasses.integrate.Integrate">
+<em class="property">class </em><code class="sig-prename descclassname">mlflowrate.backend.subclasses.integrate.</code><code class="sig-name descname">Integrate</code><span class="sig-paren">(</span><em class="sig-param">dfs</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflowrate.backend.subclasses.integrate.Integrate" title="Permalink to this definition">¶</a></dt>
+<dd><p>First of nested backend: integrate raw messy data into consistent, cleaned Spark DataFrames.</p>
+<p>This class provides the tools for cleaning and reorganising data. The user must understand what
+the data consists of and these are provided by the plotting and status features.</p>
+<p>Users must understand that the imported data initially is in a Spark DataFrame, but a corresponding
+dictionary format is created upon instantiation of this class. The dictionary format removes the
+inconsistency sampling of features in Spark DataFrames.</p>
+<dl class="attribute">
+<dt id="mlflowrate.backend.subclasses.integrate.Integrate._track_org">
+<code class="sig-name descname">_track_org</code><a class="headerlink" href="#mlflowrate.backend.subclasses.integrate.Integrate._track_org" title="Permalink to this definition">¶</a></dt>
+<dd><p>dictionary of boolean values: if true both Spark DataFrame and Dictionary formats
+are consistent to each other.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mlflowrate.backend.subclasses.integrate.Integrate._formats">
+<code class="sig-name descname">_formats</code><a class="headerlink" href="#mlflowrate.backend.subclasses.integrate.Integrate._formats" title="Permalink to this definition">¶</a></dt>
+<dd><p>list of organisational formats</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflowrate.backend.subclasses.integrate.Integrate.add_data">
+<code class="sig-name descname">add_data</code><span class="sig-paren">(</span><em class="sig-param">add_dfs</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflowrate.backend.subclasses.integrate.Integrate.add_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a dictionary of new dfs into the class: {name:df, name:df, name:df etc.}</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>add_dfs</strong> (<em>dict</em>) – Dictionary of Spark DataFrames.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflowrate.backend.subclasses.integrate.Integrate.clean_data">
+<code class="sig-name descname">clean_data</code><span class="sig-paren">(</span><em class="sig-param">data</em>, <em class="sig-param">null_col=None</em>, <em class="sig-param">remove_nulls=False</em>, <em class="sig-param">char_col=None</em>, <em class="sig-param">remove_char=None</em>, <em class="sig-param">zeros_col=None</em>, <em class="sig-param">remove_zeros=False</em>, <em class="sig-param">avg_over=None</em>, <em class="sig-param">is_dict=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflowrate.backend.subclasses.integrate.Integrate.clean_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Multi-functional method to clean data.</p>
+<p>If column arguments are not specified. Method will assume the entire DataFrame.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>str</em>) – name of the data to clean.</p></li>
+<li><p><strong>null_col</strong> (<em>str</em>) – name of the column in data to remove null from.</p></li>
+<li><p><strong>remove_nulls</strong> (<em>bool</em>) – option to remove nulls.</p></li>
+<li><p><strong>char_col</strong> (<em>str</em>) – name of the column in data to remove char from.</p></li>
+<li><p><strong>remove_char</strong> (<em>bool</em>) – option to remove char</p></li>
+<li><p><strong>zeros_col</strong> (<em>str</em>) – name of the column in data to remove zeros from.</p></li>
+<li><p><strong>remove_zeros</strong> (<em>bool</em>) – option to remove zeros.</p></li>
+<li><p><strong>avg_over</strong> (<em>str</em>) – periodicity for averaging: “day”, “week”, “month”</p></li>
+<li><p><strong>is_dict</strong> (<em>bool</em>) – special option to select for averaging if Spark DataFrame is inconsistent.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflowrate.backend.subclasses.integrate.Integrate.drop_col">
+<code class="sig-name descname">drop_col</code><span class="sig-paren">(</span><em class="sig-param">data</em>, <em class="sig-param">*features</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflowrate.backend.subclasses.integrate.Integrate.drop_col" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove a number of columns from Spark DataFrame.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>str</em>) – name of data to drop columns.</p></li>
+<li><p><strong>*features</strong> – argument list of the features to drop in data.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflowrate.backend.subclasses.integrate.Integrate.edit_col">
+<code class="sig-name descname">edit_col</code><span class="sig-paren">(</span><em class="sig-param">data</em>, <em class="sig-param">feature</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflowrate.backend.subclasses.integrate.Integrate.edit_col" title="Permalink to this definition">¶</a></dt>
+<dd><p>Multi-functional method to edit a specific column in data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>str</em>) – name of the data.</p></li>
+<li><p><strong>feature</strong> (<em>str</em>) – name of the specific column in data.</p></li>
+<li><p><strong>**kwargs</strong> – Options for editing the columns of data: typ, newname, std</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflowrate.backend.subclasses.integrate.Integrate.get_data">
+<code class="sig-name descname">get_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mlflowrate.backend.subclasses.integrate.Integrate.get_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the formatted dictionaries of Spark DataFrames and Dictionaries.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Dictionaries of Spark DataFrames and Dictionaries.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflowrate.backend.subclasses.integrate.Integrate.merge_data">
+<code class="sig-name descname">merge_data</code><span class="sig-paren">(</span><em class="sig-param">newname</em>, <em class="sig-param">first</em>, <em class="sig-param">second</em>, <em class="sig-param">axis=0</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflowrate.backend.subclasses.integrate.Integrate.merge_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Append Spark DataFrames vertically or horizontally.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>newname</strong> (<em>str</em>) – new name of the merged DataFrames</p></li>
+<li><p><strong>first</strong> (<em>str</em>) – name of data to join from.</p></li>
+<li><p><strong>second</strong> (<em>str</em>) – name of data to join to.</p></li>
+<li><p><strong>axis</strong> (<em>int</em>) – Direction of append.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflowrate.backend.subclasses.integrate.Integrate.organise_data">
+<code class="sig-name descname">organise_data</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">dfmat</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflowrate.backend.subclasses.integrate.Integrate.organise_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Key method for integrating mixed data into consistent Spark DataFrame formats.</p>
+<dl>
+<dt>Users are provided three different options to format the disorganised data:</dt><dd><dl class="simple">
+<dt>date_tag_val_col: If the Spark DataFrame has only three columns <a href="#id5"><span class="problematic" id="id6">|date|tagname|value|</span></a>, then</dt><dd><p>the user is provided options to sort data by distinct features, and further
+categorically by oil wells. An inconsistent Spark DataFrame and corresponding
+Dictionary format is produced.</p>
+</dd>
+</dl>
+<p>mult_col: Make a corresponding Dictionary format from a Spark DataFrame.
+dict_col: Make a corresponding and consistent Spark DataFrame from a Dictionary format.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – Name of data to format.</p></li>
+<li><p><strong>dfmat</strong> (<em>str</em>) – Options to format data.</p></li>
+<li><p><strong>**kwargs</strong> – Further args for sorting date, tagname, and value data: distinct_oilwells, change_sensor_names.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflowrate.backend.subclasses.integrate.Integrate.select_col">
+<code class="sig-name descname">select_col</code><span class="sig-paren">(</span><em class="sig-param">data</em>, <em class="sig-param">*features</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflowrate.backend.subclasses.integrate.Integrate.select_col" title="Permalink to this definition">¶</a></dt>
+<dd><p>Keep a number of columns from Spark DataFrame to be the Spark DataFrame.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>str</em>) – name of data to keep columns.</p></li>
+<li><p><strong>*features</strong> – argument list of the features to keep in data.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflowrate.backend.subclasses.integrate.Integrate.set_organised">
+<code class="sig-name descname">set_organised</code><span class="sig-paren">(</span><em class="sig-param">name</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflowrate.backend.subclasses.integrate.Integrate.set_organised" title="Permalink to this definition">¶</a></dt>
+<dd><p>Data which is organised will be put into the out_dfs/dicts for the next phase.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> (<em>str</em>) – name of data to be set as organised.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflowrate.backend.subclasses.integrate.Integrate.show">
+<code class="sig-name descname">show</code><span class="sig-paren">(</span><em class="sig-param">data</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflowrate.backend.subclasses.integrate.Integrate.show" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display the data (Spark DataFrame) contained in Integrate.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>str</em>) – Name of the data.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflowrate.backend.subclasses.integrate.Integrate.status">
+<code class="sig-name descname">status</code><span class="sig-paren">(</span><em class="sig-param">data=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflowrate.backend.subclasses.integrate.Integrate.status" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display the status of all the data in the current stage or the status of a specific data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>str</em>) – Name of data to check the status of.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="datasets.html" class="btn btn-neutral float-right" title="submodule" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="workflow.html" class="btn btn-neutral float-left" title="main module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Kevin Fung
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
