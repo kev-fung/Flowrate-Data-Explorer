@@ -1,10 +1,15 @@
-# ACSE 9: Independent Research Project
-## MSC Applied Computational Science and Engineering
-## mlflowrate: A data integration and machine learning package for predicting liquid flow rates
-### Author: Kevin Fung
-### CID: 01098510
-### Email: kkf18@ic.ac.uk
+## mlflowrate: A Data Integration and Science Package for Predicting Oil Well Flow Rates 
+- Author: Kevin Fung
+- CID: 01098510
+- Email: kkf18@ic.ac.uk
 
+**MSC Applied Computational Science and Engineering**
+
+ACSE 9: Independent Research Project
+
+
+
+When given a large range of data it is difficult 
 This software is designed for processing raw well data and producing liquid rate predictions given a range of machine learning models. 
 
 ## Documentation
