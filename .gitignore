@@ -3,3 +3,5 @@
 mlflowrate/build/
 mlflowrate/dist/
 mlflowrate/mlflowrate.egg-info/
+mlflowrate/docs/
+mlflowrate/sphinx/
