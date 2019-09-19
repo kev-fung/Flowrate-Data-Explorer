@@ -7,6 +7,10 @@
 
 This software is designed for processing raw well data and producing liquid rate predictions given a range of machine learning models. 
 
+## Documentation
+https://kkf18.github.io/acse-9-independent-research-project-kkf18/
+
+
 ## Data Privacy
 Access to data is restricted due to company legalities.
 
