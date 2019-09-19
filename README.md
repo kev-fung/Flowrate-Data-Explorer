@@ -8,7 +8,7 @@ ACSE 9: Independent Research Project
 - Email: kkf18@ic.ac.uk
 
 
-### Description
+## Description
 One of the main problems encountered in industry is data integration for machine learning applications. The developed package has been designed to integrate common well data into clean, consistent Spark or Pandas DataFrames for machine learning. The exploratory module features are currently tailored for Scale Detection for North Sea Oil Wells, more information can be found in the IRP report in the docs.
 
 ## Documentation
