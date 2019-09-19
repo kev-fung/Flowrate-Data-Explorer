@@ -48,7 +48,7 @@ Finally, the user can now progress onto the 3 data science stages, for example:
       The tag name may contain one or two pieces of information for us to sort through.  
       In our case, the data provided contained information on measurement origins and what the measurement was.
 
-          E.g. **OILWELL-TEMPXX**    
+          E.g. OILWELL-TEMPXXYY   
 
       The function    `organise_data()`    organises data into their unique oil well origins and sensor measurement types. See the documentations for further information.
     
