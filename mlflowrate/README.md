@@ -43,19 +43,19 @@ Finally, the user can now progress onto the 3 data science stages, for example:
     1.1 **Tagname Format**  
       Oil well characteristic data given in the columnar form: 
 
-      | date | tag | value |
+          | date | tag | value |    
 
       The tag name may contain one or two pieces of information for us to sort through.  
       In our case, the data provided contained information on measurement origins and what the measurement was.
 
-      E.g. **OILWELL-TEMPXX**  
+          E.g. **OILWELL-TEMPXX**    
 
       The function    `organise_data()`    organises data into their unique oil well origins and sensor measurement types. See the documentations for further information.
     
     1.2 **Standard Format**      
       Oil well characteristic data given as multiple features against the date column.
 
-      | date | temp | pres | choke | etc. |
+          | date | temp | pres | choke | etc. |    
 
       The function   `organise_data()`    also organises this data for integrating into the mlflowrate pipeline.
 
