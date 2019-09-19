@@ -1,5 +1,5 @@
 # mlflowrate: Data Integration and Science Package for Predicting Oil Well Flow Rates 
-**MSC Applied Computational Science and Engineering**
+**MSc Applied Computational Science and Engineering**
 
 ACSE 9: Independent Research Project
 
