@@ -1,31 +1,82 @@
-# ACSE 9: Independent Research Project
-## MSC Applied Computational Science and Engineering
-## mlflowrate: A data integration and machine learning package for predicting liquid flow rates
-### Author: Kevin Fung
-### CID: 01098510
-### Email: kkf18@ic.ac.uk
+# mlflowrate: Software Explanation
 
-This software is designed for processing raw well data and producing liquid rate predictions given a range of machine learning models. 
+## How to use:
+Oilwell data can arrive via excel spreadsheets or mixed tagged csv formats. It's important to be able to properly integrate these styles into consistent dataframes for machine learning!
 
-## Data Privacy
-Access to data is restricted due to company legalities.
+The main modules revolve around the data integration and data science pipeline, the modules are:
 
-## Installation
-The package is designed to run within an Azure Databricks environment.
-For local installations, move into the source folder, mlflowrates, then pip install the package.
+1. Integrate
+2. DataSets
+3. Explore
 
-## Usage
-Usage for the software is provided in the form of a notebook, EXAMPLE.ipynb, to allow users to understand how to use the code.
+### WorkFlow Module
+The data management parent module: **WorkFlow**, controls the flow of data between these three modules.  
+Users can use:    `WorkFlow.status()`    to check the stage in the pipeline they're at.  
+The    `WorkFlow.nextphase()`    method enables user progression onto the next stage.
 
-## License
-MIT Licence
+Users must import the data first as a Spark DataFrame: The original file types should be converted to .csv files, then use the Spark API to import the csv file as a Spark dataframe.
 
-## Version Log
-Due to company reasons and data privacy control, version controlling approach may change over time. 
-A log below will keep track of these changes.
+We assume timeseries data given the nature of predicting flow rates: all date columns must be renamed as **"datetime"** for the software to work!
 
-| Log Date  | Comment |
-| ------------- | ------------- |
-| **09/07/2019** | <ul><li>Committing .ipynb changes to repository from Azure Databricks</li></ul> |
-| **11/07/2019** | <ul><li>**[NOTICE]** Discussions with upper management show concerns with data and graphs being shown in notebooks. Talks are still going, but as precaution, notebooks with results from previous commits up to now have been removed.</li></ul> |
-| **18/07/2019** | <ul><li>A solution workflow to avoid data exposure has been devised. Any package/module development will be conducted with PyCharm (with Github integration). </li><li>A bash script has been written for Microsoft Azure Notebooks to import Github repository into the Azure workspace, and can also import packages into notebooks.</li><li>Notebook states and results will be cleared before pushing to the repository.</li></ul> |
+After importing the csv files as Spark DataFrames, to start using mlflowrate, one must name each data and collect them into a dictionary. This is then passed into an instantiation of a WorkFlow object:
+    
+    datas = {data1: Spark DataFrame, data2: Spark DataFrame}
+    pipeline = WorkFlow(datas)
+
+Finally, the user can now progress onto the 3 data science stages, for example:
+
+    pipeline.integrate.cleandata()
+    pipeline.integrate.organise()
+    
+    pipeline.nextphase()
+    
+    pipeline.datasets.makeset()
+    pipeline.datasets.correlation()
+
+**Check the user documentations for the features and descriptions!**  
+https://kkf18.github.io/acse-9-independent-research-project-kkf18/
+
+### Important things to note:
+
+1. **Data Formats**  
+  Two types of common data formats are targeted for data integration:
+  
+    1.1 **Tagname Format**  
+      Oil well characteristic data given in the columnar form: 
+
+          | datetime | tag | value |    
+
+      The tag name may contain one or two pieces of information for us to sort through.  
+      In our case, the data provided contained information on measurement origins and what the measurement was.
+
+          E.g. OILWELL-TEMPXXYY   
+
+      The function    `organise_data()`    organises data into their unique oil well origins and sensor measurement types. See the documentations for further information.
+    
+    1.2 **Standard Format**      
+      Oil well characteristic data given as multiple features against the date column.
+
+          | datetime | temp | pres | choke | etc. |    
+
+      The function   `organise_data()`    also organises this data for integrating into the mlflowrate pipeline.
+
+2. **Understanding how to integrate and clean the data**  
+  A problem with oil well data given in the "Tagname Format" is that we can have incontiguous features.
+  
+      E.g: Temperature has 365 samples spanning from 2016-2017, but pressure has 720 samples spanning from 2016-2018.  
+
+      This means when the two features are combined into a DataFrame, temperature will contain an extra 365 nulls to fill up the empty space to keep the data symmetry.  
+
+      mlflowrate organises these incontiguous data into two formats for cleaning and integration:  
+        1. **Spark DataFrame Format**  
+        2. **Dictionary Format**  
+
+      The Dictionary Format separates out the individual features and collected them into their own key-value pairs in a dictionary.  
+      For example:
+
+          Dictionary = {temperature: | datetime | value |,  pressure: | datetime | value |}
+
+      Every data passed into the software will have a Spark DataFrame Format, and a Dictionary Format.
+      Using any of the cleaning methods in the package will change both of these formats.
+
+      It is the users job to produce a contiguous and clean Spark DataFrame format for the next stage. The    `.status()`    method enables users to check for duplicates, nulls and sample sizes for assistance.
