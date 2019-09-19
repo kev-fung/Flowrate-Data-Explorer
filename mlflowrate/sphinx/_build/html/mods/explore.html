@@ -1,0 +1,546 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>submodule &mdash; mlflowrate 0.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="backend" href="base.html" />
+    <link rel="prev" title="submodule" href="datasets.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> mlflowrate
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Guides:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../man/manual.html">User Manual</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Documentation:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="workflow.html">workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="integrate.html">integrate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="datasets.html">datasets</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">explore</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#explore">Explore</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Backend:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="base.html">base</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Housekeeping:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Licence.html">Licence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="requirements.html">Requirements</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">mlflowrate</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>submodule</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/mods/explore.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="submodule">
+<h1>submodule<a class="headerlink" href="#submodule" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="explore">
+<h2>Explore<a class="headerlink" href="#explore" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-mlflowrate.backend.subclasses.explore"></span><p>Kevin Fung - Github Alias: kkf18</p>
+<p>Stage 3: nested class for exploratory data analysis.
+This module contains the features to apply machine learning models, validate, and evaluate model performances.
+Several helper features also provided for external EDA.</p>
+<dl class="simple">
+<dt>The current validation and evaluation methods focus on Scale Detection Data:</dt><dd><p>Validation: Nested K-Fold Cross Validation
+Evaluation: Comparing to MIKON data, both qualitatively and quantitively.</p>
+</dd>
+</dl>
+<dl class="class">
+<dt id="mlflowrate.backend.subclasses.explore.Explore">
+<em class="property">class </em><code class="sig-prename descclassname">mlflowrate.backend.subclasses.explore.</code><code class="sig-name descname">Explore</code><span class="sig-paren">(</span><em class="sig-param">datasets</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflowrate.backend.subclasses.explore.Explore" title="Permalink to this definition">¶</a></dt>
+<dd><p>Nested class to enable users to explore machine learning approaches to the dataset.</p>
+<p>The ML features have been designed for Scale Detection data.
+Class features are to be used in conjunction with Scikit Learn Methods.</p>
+<dl class="attribute">
+<dt id="mlflowrate.backend.subclasses.explore.Explore.results">
+<code class="sig-name descname">results</code><a class="headerlink" href="#mlflowrate.backend.subclasses.explore.Explore.results" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dictionary of Result objects.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflowrate.backend.subclasses.explore.Explore.benchmark">
+<code class="sig-name descname">benchmark</code><span class="sig-paren">(</span><em class="sig-param">date</em>, <em class="sig-param">ytrue</em>, <em class="sig-param">ypred</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflowrate.backend.subclasses.explore.Explore.benchmark" title="Permalink to this definition">¶</a></dt>
+<dd><p>Store a benchmark results object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>date</strong> (<em>Array-like</em>) – Array-like object which contains the corresponding dates to the results.</p></li>
+<li><p><strong>ytrue</strong> (<em>Array-like</em>) – Array-like object which contains the list of true values.</p></li>
+<li><p><strong>ypred</strong> (<em>Array-like</em>) – Array-like object which contains the list of predicted values.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflowrate.backend.subclasses.explore.Explore.evalplot">
+<code class="sig-name descname">evalplot</code><span class="sig-paren">(</span><em class="sig-param">traindate</em>, <em class="sig-param">testdate</em>, <em class="sig-param">trainy</em>, <em class="sig-param">testy</em>, <em class="sig-param">testpred</em>, <em class="sig-param">testunc=0.15</em>, <em class="sig-param">axs=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflowrate.backend.subclasses.explore.Explore.evalplot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display the evaluation MIKON comparison plot.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>traindate</strong> (<em>Array-like</em>) – Array-like object containing dates corresponding to results.</p></li>
+<li><p><strong>testdate</strong> (<em>Array-like</em>) – Array-like object containing dates corresponding to test results.</p></li>
+<li><p><strong>trainy</strong> (<em>Array-like</em>) – Array-like object containing the true training labels.</p></li>
+<li><p><strong>testy</strong> (<em>Array-like</em>) – Array-like object containing the true test labels.</p></li>
+<li><p><strong>testpred</strong> (<em>Array-like</em>) – Array-like object containing test predictions.</p></li>
+<li><p><strong>testunc</strong> (<em>double</em>) – Relative uncertainty of the MIKON model.</p></li>
+<li><p><strong>axs</strong> (<em>Obj</em>) – Matplotlib axes object.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflowrate.backend.subclasses.explore.Explore.evaluate">
+<code class="sig-name descname">evaluate</code><span class="sig-paren">(</span><em class="sig-param">model</em>, <em class="sig-param">traindataset</em>, <em class="sig-param">testdataset</em>, <em class="sig-param">param_grid</em>, <em class="sig-param">splits=10</em>, <em class="sig-param">testunc=0.15</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflowrate.backend.subclasses.explore.Explore.evaluate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Final test: Train model on entire dataset with best hyperparameters and compare to MIKON.</p>
+<p>Method compares predictions to MIKON:
+Plot against MIKON: To see if predictions produces correct trends.
+RMSE from MIKON uncertainty range: Quantitive performance metric.
+Percentage of predictions within MIKON uncertainty range: Quantitive performance metric.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> (<em>Obj</em>) – Scikit Learn model.</p></li>
+<li><p><strong>traindataset</strong> (<em>Obj</em>) – dset object for training.</p></li>
+<li><p><strong>testdataset</strong> (<em>Obj</em>) – dset object for testing.</p></li>
+<li><p><strong>param_grid</strong> (<em>dict</em>) – Scikit Learn parameter tuning dictionary.</p></li>
+<li><p><strong>splits</strong> (<em>int</em>) – Number of folds for hyper parameter tuning.</p></li>
+<li><p><strong>testunc</strong> (<em>double</em>) – Relative uncertainty of MIKON model.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>model_params which are the best hyperparameters for the model tuned on all the data.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflowrate.backend.subclasses.explore.Explore.fitpredict">
+<code class="sig-name descname">fitpredict</code><span class="sig-paren">(</span><em class="sig-param">model</em>, <em class="sig-param">traindataset</em>, <em class="sig-param">testdataset</em>, <em class="sig-param">param_grid=None</em>, <em class="sig-param">splits=10</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflowrate.backend.subclasses.explore.Explore.fitpredict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wrapper method to fit a model to a train dataset and predict on a test dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> (<em>Obj</em>) – Scikit Learn model.</p></li>
+<li><p><strong>traindataset</strong> (<em>Obj</em>) – dset object for training.</p></li>
+<li><p><strong>testdataset</strong> (<em>Obj</em>) – dset object for testing.</p></li>
+<li><p><strong>param_grid</strong> (<em>dict</em>) – Scikit Learn parameter tuning dictionary.</p></li>
+<li><p><strong>splits</strong> (<em>int</em>) – Number of folds for hyper parameter tuning.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Predictions of test dataset from model.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflowrate.backend.subclasses.explore.Explore.fitpredict_naivemodels">
+<code class="sig-name descname">fitpredict_naivemodels</code><span class="sig-paren">(</span><em class="sig-param">traindataset</em>, <em class="sig-param">testdataset</em>, <em class="sig-param">errmetric='r2'</em>, <em class="sig-param">eval_all=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflowrate.backend.subclasses.explore.Explore.fitpredict_naivemodels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wrapper method to fit a list of common models to a train dataset and predict on a test dataset.</p>
+<p>Method will only return the best model results if eval_all is False, i.e. it will not
+return the performances of the other models.</p>
+<dl class="simple">
+<dt>Models are:</dt><dd><p>Linear Regression
+ElasticNet
+Lasso
+Ridge
+PLS Regression
+Random Forests Regression</p>
+</dd>
+</dl>
+<p>Hyperparameter tuning ranges are preselected in this method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>traindataset</strong> (<em>Obj</em>) – dset object for training.</p></li>
+<li><p><strong>testdataset</strong> (<em>Obj</em>) – dset object for testing.</p></li>
+<li><p><strong>errmetric</strong> (<em>str</em>) – “r2” or “rmse” for k-fold nested validation metric.</p></li>
+<li><p><strong>eval_all</strong> (<em>bool</em>) – Evaluate all models on test dataset.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>evaluation metrics and results in a dictionary.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflowrate.backend.subclasses.explore.Explore.get_datasets">
+<code class="sig-name descname">get_datasets</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mlflowrate.backend.subclasses.explore.Explore.get_datasets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return datasets dictionary for modelling outside the WorkFlow framework.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflowrate.backend.subclasses.explore.Explore.get_results">
+<code class="sig-name descname">get_results</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mlflowrate.backend.subclasses.explore.Explore.get_results" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return results dictionary containing the different results objects.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflowrate.backend.subclasses.explore.Explore.input_results">
+<code class="sig-name descname">input_results</code><span class="sig-paren">(</span><em class="sig-param">result_name</em>, <em class="sig-param">date=None</em>, <em class="sig-param">ypred=None</em>, <em class="sig-param">ytrue=None</em>, <em class="sig-param">r2=0.0</em>, <em class="sig-param">rmse=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflowrate.backend.subclasses.explore.Explore.input_results" title="Permalink to this definition">¶</a></dt>
+<dd><p>Import results into the results dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>result_name</strong> (<em>str</em>) – Name of the results object.</p></li>
+<li><p><strong>date</strong> (<em>Array-like</em>) – Array-like object which contains the corresponding dates to the results.</p></li>
+<li><p><strong>ytrue</strong> (<em>Array-like</em>) – Array-like object which contains the list of true values.</p></li>
+<li><p><strong>ypred</strong> (<em>Array-like</em>) – Array-like object which contains the list of predicted values.</p></li>
+<li><p><strong>r2</strong> (<em>double</em>) – r2 score.</p></li>
+<li><p><strong>rmse</strong> (<em>double</em>) – root mean squared error.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflowrate.backend.subclasses.explore.Explore.plotmodels">
+<code class="sig-name descname">plotmodels</code><span class="sig-paren">(</span><em class="sig-param">traindataset</em>, <em class="sig-param">testdataset</em>, <em class="sig-param">modelpreds</em>, <em class="sig-param">testunc=0.15</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflowrate.backend.subclasses.explore.Explore.plotmodels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluation plot (MIKON Comparison) for a list of different model results on the same graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>traindataset</strong> (<em>Obj</em>) – dset object for training.</p></li>
+<li><p><strong>testdataset</strong> (<em>Obj</em>) – dset object for testing.</p></li>
+<li><p><strong>modelpreds</strong> (<em>dict</em>) – Dictionary of different model predictive results: {“model name” : Array-like results}</p></li>
+<li><p><strong>testunc</strong> (<em>double</em>) – Relative uncertainty of the MIKON model.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflowrate.backend.subclasses.explore.Explore.status">
+<code class="sig-name descname">status</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mlflowrate.backend.subclasses.explore.Explore.status" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display the datasets created and the results objects.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflowrate.backend.subclasses.explore.Explore.trainplot">
+<code class="sig-name descname">trainplot</code><span class="sig-paren">(</span><em class="sig-param">traindate</em>, <em class="sig-param">trainpred</em>, <em class="sig-param">trainy</em>, <em class="sig-param">axs=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflowrate.backend.subclasses.explore.Explore.trainplot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Display the training plot of the model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>traindate</strong> (<em>Array-like</em>) – Array-like object containing dates corresponding to results.</p></li>
+<li><p><strong>trainpred</strong> (<em>Array-like</em>) – Array-like object containing training predictions.</p></li>
+<li><p><strong>trainy</strong> (<em>Array-like</em>) – Array-like object containing the true training labels.</p></li>
+<li><p><strong>axs</strong> (<em>Obj</em>) – Matplotlib axes object.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflowrate.backend.subclasses.explore.Explore.validate">
+<code class="sig-name descname">validate</code><span class="sig-paren">(</span><em class="sig-param">model</em>, <em class="sig-param">traindataset</em>, <em class="sig-param">param_grid</em>, <em class="sig-param">outer=10</em>, <em class="sig-param">inner=5</em>, <em class="sig-param">verb=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflowrate.backend.subclasses.explore.Explore.validate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Nested K-fold cross validation method based on grid searches.</p>
+<p>Method wraps around Scikit Learn objects.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> (<em>Obj</em>) – Scikit Learn model.</p></li>
+<li><p><strong>traindataset</strong> (<em>Obj</em>) – dset object for training.</p></li>
+<li><p><strong>param_grid</strong> (<em>dict</em>) – Scikit Learn parameter tuning dictionary.</p></li>
+<li><p><strong>outer</strong> (<em>int</em>) – Number of outer layer folds.</p></li>
+<li><p><strong>inner</strong> (<em>int</em>) – Number of inner layer folds.</p></li>
+<li><p><strong>verb</strong> (<em>bool</em>) – Display scores.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Averaged R2 and RMSE scores from nested cross validation.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mlflowrate.backend.subclasses.explore.Result">
+<em class="property">class </em><code class="sig-prename descclassname">mlflowrate.backend.subclasses.explore.</code><code class="sig-name descname">Result</code><span class="sig-paren">(</span><em class="sig-param">date=None</em>, <em class="sig-param">ypred=None</em>, <em class="sig-param">ytrue=None</em>, <em class="sig-param">r2=0.0</em>, <em class="sig-param">rmse=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflowrate.backend.subclasses.explore.Result" title="Permalink to this definition">¶</a></dt>
+<dd><p>Data storing class for evaluation results.</p>
+<p>If the truth values are provided, the R2 and rmse scores are calculated.</p>
+<dl class="attribute">
+<dt id="mlflowrate.backend.subclasses.explore.Result.date">
+<code class="sig-name descname">date</code><a class="headerlink" href="#mlflowrate.backend.subclasses.explore.Result.date" title="Permalink to this definition">¶</a></dt>
+<dd><p>Corresponding dates.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Array-like</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mlflowrate.backend.subclasses.explore.Result.ypred">
+<code class="sig-name descname">ypred</code><a class="headerlink" href="#mlflowrate.backend.subclasses.explore.Result.ypred" title="Permalink to this definition">¶</a></dt>
+<dd><p>Model predictions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Array-like</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mlflowrate.backend.subclasses.explore.Result.ytrue">
+<code class="sig-name descname">ytrue</code><a class="headerlink" href="#mlflowrate.backend.subclasses.explore.Result.ytrue" title="Permalink to this definition">¶</a></dt>
+<dd><p>Truth values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Array-like</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mlflowrate.backend.subclasses.explore.Result.r2">
+<code class="sig-name descname">r2</code><a class="headerlink" href="#mlflowrate.backend.subclasses.explore.Result.r2" title="Permalink to this definition">¶</a></dt>
+<dd><p>R2 score.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>double</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mlflowrate.backend.subclasses.explore.Result.rmse">
+<code class="sig-name descname">rmse</code><a class="headerlink" href="#mlflowrate.backend.subclasses.explore.Result.rmse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Root mean squared error.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>double</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mlflowrate.backend.subclasses.explore.Result.n">
+<code class="sig-name descname">n</code><a class="headerlink" href="#mlflowrate.backend.subclasses.explore.Result.n" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of results.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflowrate.backend.subclasses.explore.Result.calc_rmse">
+<code class="sig-name descname">calc_rmse</code><span class="sig-paren">(</span><em class="sig-param">ytrue</em>, <em class="sig-param">ypred</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflowrate.backend.subclasses.explore.Result.calc_rmse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the root mean squared error.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ypred</strong> (<em>Array-like</em>) – Model predictions.</p></li>
+<li><p><strong>ytrue</strong> (<em>Array-like</em>) – Truth values.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflowrate.backend.subclasses.explore.Result.plot_residual">
+<code class="sig-name descname">plot_residual</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mlflowrate.backend.subclasses.explore.Result.plot_residual" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot the error residual graph.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="base.html" class="btn btn-neutral float-right" title="backend" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="datasets.html" class="btn btn-neutral float-left" title="submodule" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Kevin Fung
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

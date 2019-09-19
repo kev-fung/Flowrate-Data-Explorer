@@ -1,0 +1,323 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>backend &mdash; mlflowrate 0.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="MIT License" href="Licence.html" />
+    <link rel="prev" title="submodule" href="explore.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> mlflowrate
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Guides:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../man/manual.html">User Manual</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Documentation:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="workflow.html">workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="integrate.html">integrate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="datasets.html">datasets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="explore.html">explore</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Backend:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">base</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-mlflowrate.backend.base">Base</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Housekeeping:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Licence.html">Licence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="requirements.html">Requirements</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">mlflowrate</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>backend</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/mods/base.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="backend">
+<h1>backend<a class="headerlink" href="#backend" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-mlflowrate.backend.base">
+<span id="base"></span><h2>Base<a class="headerlink" href="#module-mlflowrate.backend.base" title="Permalink to this headline">¶</a></h2>
+<p>Kevin Fung - Github Alias: kkf18</p>
+<p>Private parent class for workflow backend.
+This module is intended to contain key features that will be used across all workflow backend.</p>
+<dl class="class">
+<dt id="mlflowrate.backend.base.Base">
+<em class="property">class </em><code class="sig-prename descclassname">mlflowrate.backend.base.</code><code class="sig-name descname">Base</code><span class="sig-paren">(</span><em class="sig-param">dfs=None</em>, <em class="sig-param">dicts=None</em>, <em class="sig-param">datasets=None</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflowrate.backend.base.Base" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parent class for workflow backend.</p>
+<p>Currently holds public data attributes, reorganisation methods, and plotting methods.</p>
+<dl class="attribute">
+<dt id="mlflowrate.backend.base.Base.dfs">
+<code class="sig-name descname">dfs</code><a class="headerlink" href="#mlflowrate.backend.base.Base.dfs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dictionary of different Spark DataFrames holding mixed features of well data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mlflowrate.backend.base.Base.dicts">
+<code class="sig-name descname">dicts</code><a class="headerlink" href="#mlflowrate.backend.base.Base.dicts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dictionary of different organised dictionaries of single featured well data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mlflowrate.backend.base.Base.sets">
+<code class="sig-name descname">sets</code><a class="headerlink" href="#mlflowrate.backend.base.Base.sets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dictionary of different Spark DataFrames created by the user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mlflowrate.backend.base.Base.datasets">
+<code class="sig-name descname">datasets</code><a class="headerlink" href="#mlflowrate.backend.base.Base.datasets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dictionary of different Dset objects that hold the datasets for machine learning.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mlflowrate.backend.base.Base.CB_color_cycle">
+<code class="sig-name descname">CB_color_cycle</code><a class="headerlink" href="#mlflowrate.backend.base.Base.CB_color_cycle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Matplotlib plotting colour cycle.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflowrate.backend.base.Base.cache_data">
+<code class="sig-name descname">cache_data</code><span class="sig-paren">(</span><em class="sig-param">*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflowrate.backend.base.Base.cache_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wrapper method for Spark Caching DataFrames into the running cluster.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>*args</strong> – argument list of key names present in the dfs sttribute.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Cached Spark DataFrame in cluster framework.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflowrate.backend.base.Base.plot">
+<code class="sig-name descname">plot</code><span class="sig-paren">(</span><em class="sig-param">title</em>, <em class="sig-param">dicts_dfs</em>, <em class="sig-param">third_axis=None</em>, <em class="sig-param">marker_dict=None</em>, <em class="sig-param">is_sets=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflowrate.backend.base.Base.plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot multiple timeseries Spark DataFrames onto a figure, x axis = time, y axis = value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>title</strong> (<em>str</em>) – Name of Spark DataFrame</p></li>
+<li><p><strong>dicts_dfs</strong> (<em>dict</em>) – example input: {data: [WHP, DHP], data: [DHT, Qliq]}</p></li>
+<li><p><strong>third_axis</strong> (<em>dict</em>) – example input: {data: [WHP, DHP], data: [DHT, Qliq]}</p></li>
+<li><p><strong>marker_dict</strong> (<em>dict</em>) – dict of lists of dataframes with desired marker styles {marker:list}</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Matplotlib figure and axes objects for displaying in notebook.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Licence.html" class="btn btn-neutral float-right" title="MIT License" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="explore.html" class="btn btn-neutral float-left" title="submodule" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Kevin Fung
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

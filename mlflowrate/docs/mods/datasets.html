@@ -1,0 +1,447 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>submodule &mdash; mlflowrate 0.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="submodule" href="explore.html" />
+    <link rel="prev" title="submodule" href="integrate.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> mlflowrate
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Guides:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../man/manual.html">User Manual</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Documentation:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="workflow.html">workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="integrate.html">integrate</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">datasets</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#datasets">Datasets</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="explore.html">explore</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Backend:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="base.html">base</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Housekeeping:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Licence.html">Licence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="requirements.html">Requirements</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">mlflowrate</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>submodule</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/mods/datasets.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="submodule">
+<h1>submodule<a class="headerlink" href="#submodule" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="datasets">
+<h2>Datasets<a class="headerlink" href="#datasets" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-mlflowrate.backend.subclasses.datasets"></span><p>Kevin Fung - Github Alias: kkf18</p>
+<p>Stage 2: nested class to prepare datasets.
+This module contains the features to create new datasets for machine learning.
+The idea is to first create your own Spark DataFrames stored in sets, then to finalise the
+Spark DataFrame sets into a dset object stored in datasets.</p>
+<p>Statistical visualisation tools are provided in aid of feature selection.</p>
+<p>dset objects contains the necessary data splits for machine learning e.g. feature set, label set.</p>
+<dl class="class">
+<dt id="mlflowrate.backend.subclasses.datasets.DataSets">
+<em class="property">class </em><code class="sig-prename descclassname">mlflowrate.backend.subclasses.datasets.</code><code class="sig-name descname">DataSets</code><span class="sig-paren">(</span><em class="sig-param">dfs</em>, <em class="sig-param">dicts</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflowrate.backend.subclasses.datasets.DataSets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Second stage in data pipeline to assemble datasets for machine learning.</p>
+<dl class="method">
+<dt id="mlflowrate.backend.subclasses.datasets.DataSets.cache_data">
+<code class="sig-name descname">cache_data</code><span class="sig-paren">(</span><em class="sig-param">*args</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflowrate.backend.subclasses.datasets.DataSets.cache_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wrapper method for caching Spark DataFrames to speed things up!</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>*args</strong> – list of arguments specifying which sets to optimise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflowrate.backend.subclasses.datasets.DataSets.date_range">
+<code class="sig-name descname">date_range</code><span class="sig-paren">(</span><em class="sig-param">setname</em>, <em class="sig-param">start='1999-01-01'</em>, <em class="sig-param">end='2100-01-01'</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflowrate.backend.subclasses.datasets.DataSets.date_range" title="Permalink to this definition">¶</a></dt>
+<dd><p>Threshold the specified set based on a range of dates.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>setname</strong> (<em>str</em>) – Name of the set i.e. created Spark DataFrame.</p></li>
+<li><p><strong>start</strong> (<em>str</em>) – Timestamp of when to start the set: YYYY-MM-DD</p></li>
+<li><p><strong>end</strong> (<em>str</em>) – Timestamp of when to end the set: YYYY-MM-DD</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflowrate.backend.subclasses.datasets.DataSets.distributions">
+<code class="sig-name descname">distributions</code><span class="sig-paren">(</span><em class="sig-param">setname</em>, <em class="sig-param">grid_size</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflowrate.backend.subclasses.datasets.DataSets.distributions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot the kernel density distributions of the Spark DataFrame set.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>setname</strong> (<em>str</em>) – name of the set i.e. created Spark DataFrame.</p></li>
+<li><p><strong>grid_size</strong> (<em>tuple</em>) – size of the grid plot, (width, height)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflowrate.backend.subclasses.datasets.DataSets.get_data">
+<code class="sig-name descname">get_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mlflowrate.backend.subclasses.datasets.DataSets.get_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the dictionary of dset objects</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflowrate.backend.subclasses.datasets.DataSets.make_dataset">
+<code class="sig-name descname">make_dataset</code><span class="sig-paren">(</span><em class="sig-param">setname</em>, <em class="sig-param">label=None</em>, <em class="sig-param">feats=None</em>, <em class="sig-param">pandas=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflowrate.backend.subclasses.datasets.DataSets.make_dataset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finalise sets into dset objects and store into datasets dictionary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>setname</strong> (<em>str</em>) – Name of the set i.e. created Spark DataFrame.</p></li>
+<li><p><strong>label</strong> (<em>str</em>) – Specify the label column in the set (AKA: y column, prediction variable).</p></li>
+<li><p><strong>feats</strong> (<em>list</em>) – Specify the list of columns that are features in the set (AKA: X columns, predictors).</p></li>
+<li><p><strong>pandas</strong> (<em>bool</em>) – Specify to make dataframe into Pandas format.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflowrate.backend.subclasses.datasets.DataSets.make_set">
+<code class="sig-name descname">make_set</code><span class="sig-paren">(</span><em class="sig-param">setname</em>, <em class="sig-param">align_dates</em>, <em class="sig-param">feats</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflowrate.backend.subclasses.datasets.DataSets.make_set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make a new Spark DataFrame by picking the relevant features from the different data.</p>
+<p>Users must specify the align_dates argument which makes all selected features from the
+different data to be time consistent with one another. i.e. make everything daily.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>setname</strong> (<em>str</em>) – Name of the new dataset.</p></li>
+<li><p><strong>align_dates</strong> (<em>str</em>) – Options for time consistency: “days”, “weeks”, “months”</p></li>
+<li><p><strong>feats</strong> (<em>dict</em>) – Dictionary of list of features and the data it orginates from: {<a class="reference external" href="data:[feat1">data:[feat1</a>, feat2, feat3]}</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflowrate.backend.subclasses.datasets.DataSets.pairplot">
+<code class="sig-name descname">pairplot</code><span class="sig-paren">(</span><em class="sig-param">setname</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflowrate.backend.subclasses.datasets.DataSets.pairplot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot the pairwise bivariate distribution of the specified set.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>setname</strong> (<em>str</em>) – name of the set i.e. created Spark DataFrame.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflowrate.backend.subclasses.datasets.DataSets.pearsons">
+<code class="sig-name descname">pearsons</code><span class="sig-paren">(</span><em class="sig-param">setname</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflowrate.backend.subclasses.datasets.DataSets.pearsons" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plot Pearson Correlation Matrix of the specified set.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>setname</strong> (<em>str</em>) – name of the set i.e. created Spark DataFrame.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflowrate.backend.subclasses.datasets.DataSets.status">
+<code class="sig-name descname">status</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mlflowrate.backend.subclasses.datasets.DataSets.status" title="Permalink to this definition">¶</a></dt>
+<dd><p>Displays the status of all sets and datasets that have been prepared.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflowrate.backend.subclasses.datasets.DataSets.transfer_rows">
+<code class="sig-name descname">transfer_rows</code><span class="sig-paren">(</span><em class="sig-param">fromset</em>, <em class="sig-param">condition</em>, <em class="sig-param">toset</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflowrate.backend.subclasses.datasets.DataSets.transfer_rows" title="Permalink to this definition">¶</a></dt>
+<dd><p>Based on a Spark Condition, transfer certain rows satisfying this condition from one set to another.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fromset</strong> (<em>str</em>) – Name of the first set to transfer rows from.</p></li>
+<li><p><strong>condition</strong> (<em>lambda</em>) – Lambda function which contains Spark Where conditional function.</p></li>
+<li><p><strong>toset</strong> (<em>str</em>) – Name of the second set to transfer rows to.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="mlflowrate.backend.subclasses.datasets.Dset">
+<em class="property">class </em><code class="sig-prename descclassname">mlflowrate.backend.subclasses.datasets.</code><code class="sig-name descname">Dset</code><span class="sig-paren">(</span><em class="sig-param">df</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflowrate.backend.subclasses.datasets.Dset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Data storing class for datasets.</p>
+<dl class="attribute">
+<dt id="mlflowrate.backend.subclasses.datasets.Dset.df">
+<code class="sig-name descname">df</code><a class="headerlink" href="#mlflowrate.backend.subclasses.datasets.Dset.df" title="Permalink to this definition">¶</a></dt>
+<dd><p>Spark DataFrame containing date, features and labels together.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mlflowrate.backend.subclasses.datasets.Dset.is_pandas">
+<code class="sig-name descname">is_pandas</code><a class="headerlink" href="#mlflowrate.backend.subclasses.datasets.Dset.is_pandas" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if DataFrames are in Pandas format or not.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mlflowrate.backend.subclasses.datasets.Dset.Xy">
+<code class="sig-name descname">Xy</code><a class="headerlink" href="#mlflowrate.backend.subclasses.datasets.Dset.Xy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Spark or Pandas DataFrame containing features and labels together.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mlflowrate.backend.subclasses.datasets.Dset.X">
+<code class="sig-name descname">X</code><a class="headerlink" href="#mlflowrate.backend.subclasses.datasets.Dset.X" title="Permalink to this definition">¶</a></dt>
+<dd><p>Spark or Pandas DataFrame containing features only.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mlflowrate.backend.subclasses.datasets.Dset.y">
+<code class="sig-name descname">y</code><a class="headerlink" href="#mlflowrate.backend.subclasses.datasets.Dset.y" title="Permalink to this definition">¶</a></dt>
+<dd><p>Spark or Pandas DataFrame containing label only.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="mlflowrate.backend.subclasses.datasets.Dset.date">
+<code class="sig-name descname">date</code><a class="headerlink" href="#mlflowrate.backend.subclasses.datasets.Dset.date" title="Permalink to this definition">¶</a></dt>
+<dd><p>Spark or Pandas DataFrame containing date only.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="mlflowrate.backend.subclasses.datasets.Dset.split">
+<code class="sig-name descname">split</code><span class="sig-paren">(</span><em class="sig-param">label</em>, <em class="sig-param">features</em>, <em class="sig-param">pandas=False</em><span class="sig-paren">)</span><a class="headerlink" href="#mlflowrate.backend.subclasses.datasets.Dset.split" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to split the passed in Spark DataFrame into the dataset components.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>label</strong> (<em>str</em>) – Name of the label column in df.</p></li>
+<li><p><strong>features</strong> (<em>list</em>) – List of names of features in df.</p></li>
+<li><p><strong>pandas</strong> (<em>bool</em>) – Option to parse all Spark DataFrames as Pandas instead.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="explore.html" class="btn btn-neutral float-right" title="submodule" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="integrate.html" class="btn btn-neutral float-left" title="submodule" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Kevin Fung
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
