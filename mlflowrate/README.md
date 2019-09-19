@@ -1,6 +1,6 @@
-## mlflowrate: Software Explanation
+# mlflowrate: Software Explanation
 
-### How to use:
+## How to use:
 Oilwell data can arrive via excel spreadsheets or mixed tagged csv formats. It's important to be able to properly integrate these styles into consistent dataframes for machine learning!
 
 The main modules revolve around the data integration and data science pipeline, the modules are:
