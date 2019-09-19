@@ -33,7 +33,8 @@ Finally, the user can now progress onto the 3 data science stages, for example:
     pipeline.datasets.makeset()
     pipeline.datasets.correlation()
 
-**Check the user documentations for the features and descriptions!**
+**Check the user documentations for the features and descriptions!**  
+https://kkf18.github.io/acse-9-independent-research-project-kkf18/
 
 ### Important things to note:
 
