@@ -1,2 +1,5 @@
 # Ignore Pycharm settings
 .idea/
+mlflowrate/build/
+mlflowrate/dist/
+mlflowrate/mlflowrate.egg-info/

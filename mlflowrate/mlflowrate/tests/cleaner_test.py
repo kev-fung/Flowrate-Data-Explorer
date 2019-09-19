@@ -6,12 +6,12 @@ Github: kkf18
 import pytest
 import pandas as pd
 from mlflowrate.tests.conftest import create_spark_data_frame
-from mlflowrate.classes.subclasses.clean import Data
+from mlflowrate.backend.subclasses.integrate import Integrate
 
 
 @pytest.fixture()
 def data_cleaner(base_data):
-    data_cleaner = DataCleaner(base_data.dfs)
+    data_cleaner = Integrate(base_data.dfs)
     return data_cleaner
 
 

@@ -13,7 +13,7 @@ Todo:
 
 """
 
-from mlflowrate.classes.base import Base
+from mlflowrate.backend.base import Base
 
 import numpy as np
 import pandas as pd
@@ -38,7 +38,7 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.cross_decomposition import PLSRegression
 
 
-class DataExplore(Base):
+class Explore(Base):
     """Nested class to enable users to explore machine learning approaches to the dataset.
 
     The ML features have been designed for Scale Detection data.

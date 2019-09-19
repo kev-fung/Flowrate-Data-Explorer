@@ -13,9 +13,9 @@ Todo:
 
 """
 
-from mlflowrate.classes.subclasses.clean import Data
-from mlflowrate.classes.subclasses.datasets import DataSets
-from mlflowrate.classes.subclasses.explore import DataExplore
+from mlflowrate.backend.subclasses.integrate import Integrate
+from mlflowrate.backend.subclasses.datasets import DataSets
+from mlflowrate.backend.subclasses.explore import Explore
 
 
 class WorkFlow:
@@ -30,9 +30,9 @@ class WorkFlow:
         flow_datasets (dict): Dictionary of different Dset objects.
 
         _track_workflow (dict): Tracks the workflow.
-        data (obj): Instantiated Data class.
+        integrate (obj): Instantiated Integrate class.
         datasets (obj): Instantiated DataSets class.
-        dataexplore (obj): Instantiated DataExplore class.
+        explore (obj): Instantiated Explore class.
 
     """
 
@@ -48,10 +48,10 @@ class WorkFlow:
         self.flow_dicts = {}
         self.flow_datasets = {}
 
-        self._track_workflow = {"data phase": True, "dataset phase": False, "explore phase": False}
-        self.data = Data(dfs)
+        self._track_workflow = {"integrate phase": True, "dataset phase": False, "explore phase": False}
+        self.integrate = Integrate(dfs)
         self.datasets = None
-        self.dataexplore = None
+        self.explore = None
 
     def status(self):
         """Display the current stage in the data pipeline."""
@@ -63,7 +63,7 @@ class WorkFlow:
     def next_phase(self, repeat_phase=False):
         """Instantiate the next phase of the data pipeline.
 
-        Users must call this function to be able to use the subsequent classes.
+        Users must call this function to be able to use the subsequent backend.
 
         Args:
             repeat_phase (bool):
@@ -71,8 +71,8 @@ class WorkFlow:
         """
         if not self._track_workflow["explore phase"]:
             if not self._track_workflow["dataset phase"]:
-                if self._track_workflow["data phase"]:
-                    self.flow_dfs, self.flow_dicts = self.data.get_data()
+                if self._track_workflow["integrate phase"]:
+                    self.flow_dfs, self.flow_dicts = self.integrate.get_data()
                     self.datasets = DataSets(self.flow_dfs, self.flow_dicts)
                     self._track_workflow["dataset phase"] = True
                 else:
@@ -80,14 +80,14 @@ class WorkFlow:
                     self._track_workflow["data phase"] = True
             else:
                 if repeat_phase:
-                    self.flow_dfs, self.flow_dicts = self.data.get_data()
+                    self.flow_dfs, self.flow_dicts = self.integrate.get_data()
                     self.datasets = DataSets(self.flow_dfs, self.flow_dicts)
                     self._track_workflow["dataset phase"] = True
                     self._track_workflow["explore phase"] = False
                 else:
                     self.flow_datasets = self.datasets.get_data()
-                    self.dataexplore = DataExplore(self.flow_datasets)
+                    self.explore = Explore(self.flow_datasets)
                     self._track_workflow["explore phase"] = True
         else:
             print("\nEnd of exploratory data pipeline reached.")
-            self.flow_results = self.dataexplore.get_results()
+            self.flow_results = self.explore.get_results()

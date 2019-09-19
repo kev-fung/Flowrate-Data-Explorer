@@ -1,7 +1,7 @@
 """Kevin Fung - Github Alias: kkf18
 
-Private parent class for workflow classes.
-This module is intended to contain key features that will be used across all workflow classes.
+Private parent class for workflow backend.
+This module is intended to contain key features that will be used across all workflow backend.
 
 Todo:
     * None
@@ -14,7 +14,7 @@ import matplotlib as mpl
 
 
 class Base:
-    """Parent class for workflow classes.
+    """Parent class for workflow backend.
 
     Currently holds public data attributes, reorganisation methods, and plotting methods.
 
@@ -28,7 +28,7 @@ class Base:
     """
 
     def __init__(self, dfs=None, dicts=None, datasets=None):
-        """Initialise data attributes used for relevant workflow classes.
+        """Initialise data attributes used for relevant workflow backend.
 
         The first Base() instantiation from the Data() class should generate a corresponding dicts         attribute regardless of sample inconsistency in dfs.
 

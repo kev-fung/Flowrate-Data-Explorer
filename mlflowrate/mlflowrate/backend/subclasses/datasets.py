@@ -15,7 +15,7 @@ Todo:
 """
 
 from pyspark.sql import functions as F
-from mlflowrate.classes.base import Base
+from mlflowrate.backend.base import Base
 import seaborn as sns
 import matplotlib.pyplot as plt
 

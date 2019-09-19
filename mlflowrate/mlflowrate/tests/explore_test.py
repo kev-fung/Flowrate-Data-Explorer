@@ -5,7 +5,7 @@ Github: kkf18
 
 import pytest
 import numpy as np
-from mlflowrate.classes.subclasses.explore import Result
+from mlflowrate.backend.subclasses.explore import Result
 
 
 def test_calc_rsme_with_error():

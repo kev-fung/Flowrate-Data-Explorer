@@ -13,12 +13,12 @@ Todo:
 
 from pyspark.sql.types import DoubleType
 from pyspark.sql import functions as F
-from mlflowrate.classes.base import Base
+from mlflowrate.backend.base import Base
 import re
 
 
-class Data(Base):
-    """First of nested classes: integrate raw messy data into consistent, cleaned Spark DataFrames.
+class Integrate(Base):
+    """First of nested backend: integrate raw messy data into consistent, cleaned Spark DataFrames.
 
     This class provides the tools for cleaning and reorganising data. The user must understand what
     the data consists of and these are provided by the plotting and status features.
@@ -86,6 +86,14 @@ class Data(Base):
             print("Name of DataFrame   |   Organised")
             for name, org in self._track_org.items():
                 print(" {0}  |  {1} ".format(name, org))
+
+    def show(self, data):
+        """Display the data (Spark DataFrame) contained in Integrate.
+
+        Args:
+            data (str): Name of the data.
+        """
+        display(self.dfs[data])
 
     def set_organised(self, name):
         """Data which is organised will be put into the out_dfs/dicts for the next phase.
