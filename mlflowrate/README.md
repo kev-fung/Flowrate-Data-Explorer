@@ -9,20 +9,31 @@ The main modules revolve around the data integration and data science pipeline, 
 2. DataSets
 3. Explore
 
-The data management parent module: WorkFlow, controls the flow of data between these three modules.  
-Users can use:    WorkFlow.status()    to check the stage in the pipeline they're at.  
-The    WorkFlow.nextphase()    method enables user progression onto the next stage.
+### WorkFlow Module
+The data management parent module: **WorkFlow**, controls the flow of data between these three modules.  
+Users can use:    `WorkFlow.status()`    to check the stage in the pipeline they're at.  
+The    `WorkFlow.nextphase()`    method enables user progression onto the next stage.
 
 Users must import the data first as a Spark DataFrame: The original file types should be converted to .csv files, then use the Spark API to import the csv file as a Spark dataframe.
 
-We assume timeseries data given the nature of predicting flow rates: all date columns must be renamed as "datetime" for the software to work!
+We assume timeseries data given the nature of predicting flow rates: all date columns must be renamed as **"datetime"** for the software to work!
 
 After importing the csv files as Spark DataFrames, to start using mlflowrate, one must name each data and collect them into a dictionary. This is then passed into an instantiation of a WorkFlow object:
     
     datas = {data1: Spark DataFrame, data2: Spark DataFrame}
     pipeline = WorkFlow(datas)
 
-Finally, the user can now progress onto the 3 data science stages: Check the user documentations for the features!
+Finally, the user can now progress onto the 3 data science stages, for example:
+
+    pipeline.integrate.cleandata()
+    pipeline.integrate.organise()
+    
+    pipeline.nextphase()
+    
+    pipeline.datasets.makeset()
+    pipeline.datasets.correlation()
+
+**Check the user documentations for the features and descriptions!**
 
 ### Things to note:
 
@@ -39,14 +50,14 @@ Finally, the user can now progress onto the 3 data science stages: Check the use
 
       E.g. **OILWELL-TEMPXX**  
 
-      The function    organise_data()    organises data into their unique oil well origins and sensor measurement types. See the documentations for further information.
+      The function    `organise_data()`    organises data into their unique oil well origins and sensor measurement types. See the documentations for further information.
     
     1.2 **Standard Format**      
       Oil well characteristic data given as multiple features against the date column.
 
       | date | temp | pres | choke | etc. |
 
-      The function    organise_data()    also organises this data for integrating into the mlflowrate pipeline.
+      The function   `organise_data()`    also organises this data for integrating into the mlflowrate pipeline.
 
 2. **Understanding how to integrate and clean the data**  
   A problem with oil well data given in the "Tagname Format" is that we can have incontiguous features.   
@@ -65,4 +76,4 @@ Finally, the user can now progress onto the 3 data science stages: Check the use
   Every data passed into the software will have a Spark DataFrame Format, and a Dictionary Format.
   Using any of the cleaning methods in the package will change both of these formats.
   
-  It is the users job to produce a contiguous and clean Spark DataFrame format for the next stage. The    .status()    method enables users to check for duplicates, nulls and sample sizes for assistance.
+  It is the users job to produce a contiguous and clean Spark DataFrame format for the next stage. The    `.status()`    method enables users to check for duplicates, nulls and sample sizes for assistance.
