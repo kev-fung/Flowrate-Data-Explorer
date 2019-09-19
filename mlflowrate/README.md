@@ -1,31 +1,19 @@
-# ACSE 9: Independent Research Project
-## MSC Applied Computational Science and Engineering
-## mlflowrate: A data integration and machine learning package for predicting liquid flow rates
-### Author: Kevin Fung
-### CID: 01098510
-### Email: kkf18@ic.ac.uk
+## mlflowrate: Software Explanation
 
-This software is designed for processing raw well data and producing liquid rate predictions given a range of machine learning models. 
+### How to use:
+Oilwell data can arrive via excel spreadsheets or mixed tagged csv formats. It's important to be able to properly integrate these styles into consistent dataframes for machine learning!
 
-## Data Privacy
-Access to data is restricted due to company legalities.
+1. Data Formats  
+  All data is in timeseries given the nature of predicting flow rates.  
+  Two types of common data integration formats have been developed:
+  
+  - Tagnames Format  
+      Oil well characteristic data given in the columnar form: 
 
-## Installation
-The package is designed to run within an Azure Databricks environment.
-For local installations, move into the source folder, mlflowrates, then pip install the package.
+      | date | tag | value |
 
-## Usage
-Usage for the software is provided in the form of a notebook, EXAMPLE.ipynb, to allow users to understand how to use the code.
+      The tag name may contain one or two pieces of information for us to sort through.  
+      In our case, the data provided contained information on measurement origins and what the measurement was.  
+      E.g. OILWELL-TEMPXX  
+      We provide the feature    organise_data()    to be able to organise data into their unique Oilwell origins and sensor measurement types. See the documentations for further information.
 
-## License
-MIT Licence
-
-## Version Log
-Due to company reasons and data privacy control, version controlling approach may change over time. 
-A log below will keep track of these changes.
-
-| Log Date  | Comment |
-| ------------- | ------------- |
-| **09/07/2019** | <ul><li>Committing .ipynb changes to repository from Azure Databricks</li></ul> |
-| **11/07/2019** | <ul><li>**[NOTICE]** Discussions with upper management show concerns with data and graphs being shown in notebooks. Talks are still going, but as precaution, notebooks with results from previous commits up to now have been removed.</li></ul> |
-| **18/07/2019** | <ul><li>A solution workflow to avoid data exposure has been devised. Any package/module development will be conducted with PyCharm (with Github integration). </li><li>A bash script has been written for Microsoft Azure Notebooks to import Github repository into the Azure workspace, and can also import packages into notebooks.</li><li>Notebook states and results will be cleared before pushing to the repository.</li></ul> |
