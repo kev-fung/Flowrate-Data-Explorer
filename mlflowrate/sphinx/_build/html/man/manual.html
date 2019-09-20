@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mlflowrate User Manual &mdash; mlflowrate 0.0.1 documentation</title>
+  <title>mlflowrate: User Manual &mdash; mlflowrate 0.0.1 documentation</title>
   
 
   
@@ -82,7 +82,12 @@
             
               <p class="caption"><span class="caption-text">Guides:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">User Manual</a><ul class="simple">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">User Manual</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-use">How to use:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#workflow-module">WorkFlow Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#important-things-to-note">Important things to note:</a><ul class="simple">
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -146,7 +151,7 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-      <li>mlflowrate User Manual</li>
+      <li>mlflowrate: User Manual</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -166,9 +171,123 @@
            <div itemprop="articleBody">
             
   <div class="section" id="mlflowrate-user-manual">
-<h1>mlflowrate User Manual<a class="headerlink" href="#mlflowrate-user-manual" title="Permalink to this headline">¶</a></h1>
+<h1>mlflowrate: User Manual<a class="headerlink" href="#mlflowrate-user-manual" title="Permalink to this headline">¶</a></h1>
 <p>Welcome to the user manual!</p>
+<div class="section" id="how-to-use">
+<h2>How to use:<a class="headerlink" href="#how-to-use" title="Permalink to this headline">¶</a></h2>
+<p>Oilwell data can arrive via excel spreadsheets or mixed tagged csv formats. It’s important to be able to properly integrate these styles into consistent dataframes for machine learning!</p>
+<p>The main modules revolve around the data integration and data science pipeline, the modules are:</p>
+<ol class="arabic simple">
+<li><p>Integrate</p></li>
+<li><p>DataSets</p></li>
+<li><p>Explore</p></li>
+</ol>
+</div>
+<div class="section" id="workflow-module">
+<h2>WorkFlow Module<a class="headerlink" href="#workflow-module" title="Permalink to this headline">¶</a></h2>
+<p>The data management parent module: <strong>WorkFlow</strong>, controls the flow of data between these three modules.
+Users can use:    <cite>WorkFlow.status()</cite>    to check the stage in the pipeline they’re at.
+The    <cite>WorkFlow.nextphase()</cite>    method enables user progression onto the next stage.</p>
+<p>Users must import the data first as a Spark DataFrame: The original file types should be converted to .csv files, then use the Spark API to import the csv file as a Spark dataframe.</p>
+<p>We assume timeseries data given the nature of predicting flow rates: all date columns must be renamed as <strong>“datetime”</strong> for the software to work!</p>
+<p>After importing the csv files as Spark DataFrames, to start using mlflowrate, one must name each data and collect them into a dictionary. This is then passed into an instantiation of a WorkFlow object:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">datas</span> <span class="o">=</span> <span class="p">{</span><span class="n">data1</span><span class="p">:</span> <span class="n">Spark</span> <span class="n">DataFrame</span><span class="p">,</span> <span class="n">data2</span><span class="p">:</span> <span class="n">Spark</span> <span class="n">DataFrame</span><span class="p">}</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">WorkFlow</span><span class="p">(</span><span class="n">datas</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Finally, the user can now progress onto the 3 data science stages, for example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pipeline</span><span class="o">.</span><span class="n">integrate</span><span class="o">.</span><span class="n">cleandata</span><span class="p">()</span>
+<span class="n">pipeline</span><span class="o">.</span><span class="n">integrate</span><span class="o">.</span><span class="n">organise</span><span class="p">()</span>
+
+<span class="n">pipeline</span><span class="o">.</span><span class="n">nextphase</span><span class="p">()</span>
+
+<span class="n">pipeline</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">makeset</span><span class="p">()</span>
+<span class="n">pipeline</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">correlation</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>Check the user documentations for the features and descriptions!</strong>
+<a class="reference external" href="https://kkf18.github.io/acse-9-independent-research-project-kkf18/">https://kkf18.github.io/acse-9-independent-research-project-kkf18/</a></p>
+</div>
+<div class="section" id="important-things-to-note">
+<h2>Important things to note:<a class="headerlink" href="#important-things-to-note" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Data Formats</strong></p></li>
+</ol>
+<blockquote>
+<div><p>Two types of common data formats are targeted for data integration:</p>
+<p>1.1 <strong>Tagname Format</strong></p>
+<p>Oil well characteristic data given in the columnar form:</p>
+<blockquote>
+<div><table class="docutils align-default">
+<colgroup>
+<col style="width: 46%" />
+<col style="width: 27%" />
+<col style="width: 27%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>datetime</p></td>
+<td><p>tag</p></td>
+<td><p>value</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>The tag name may contain one or two pieces of information for us to sort through.
+In our case, the data provided contained information on measurement origins and what the measurement was.</p>
+<blockquote>
+<div><p><strong>E.g. OILWELL-TEMPXXYY</strong></p>
+</div></blockquote>
+<p>The function    <cite>organise_data()</cite>    organises data into their unique oil well origins and sensor measurement types. See the documentations for further information.</p>
+<p>1.2 <strong>Standard Format</strong></p>
+<p>Oil well characteristic data given as multiple features against the date column.</p>
+<blockquote>
+<div><table class="docutils align-default">
+<colgroup>
+<col style="width: 31%" />
+<col style="width: 18%" />
+<col style="width: 18%" />
+<col style="width: 18%" />
+<col style="width: 15%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p>datetime</p></td>
+<td><p>temp</p></td>
+<td><p>pres</p></td>
+<td><p>choke</p></td>
+<td><p>etc.</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>The function   <cite>organise_data()</cite>    also organises this data for integrating into the mlflowrate pipeline.</p>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li><p><strong>Understanding how to integrate and clean the data</strong></p></li>
+</ol>
+<blockquote>
+<div><p>A problem with oil well data given in the “Tagname Format” is that we can have incontiguous features.</p>
+<blockquote>
+<div><p>E.g: Temperature has 365 samples spanning from 2016-2017, but pressure has 720 samples spanning from 2016-2018.</p>
+</div></blockquote>
+<p>This means when the two features are combined into a DataFrame, temperature will contain an extra 365 nulls to fill up the empty space to keep the data symmetry.</p>
+<p>mlflowrate organises these incontiguous data into two formats for cleaning and integration:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p><strong>Spark DataFrame Format</strong></p></li>
+<li><p><strong>Dictionary Format</strong></p></li>
+</ol>
+</div></blockquote>
+<p>The Dictionary Format separates out the individual features and collected them into their own key-value pairs in a dictionary.
+For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Dictionary</span> <span class="o">=</span> <span class="p">{</span><span class="n">temperature</span><span class="p">:</span> <span class="o">|</span> <span class="n">datetime</span> <span class="o">|</span> <span class="n">value</span> <span class="o">|</span><span class="p">,</span>  <span class="n">pressure</span><span class="p">:</span> <span class="o">|</span> <span class="n">datetime</span> <span class="o">|</span> <span class="n">value</span> <span class="o">|</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Every data passed into the software will have a Spark DataFrame Format, and a Dictionary Format.
+Using any of the cleaning methods in the package will change both of these formats.</p>
+<p>It is the users job to produce a contiguous and clean Spark DataFrame format for the next stage. The    <cite>.status()</cite>    method enables users to check for duplicates, nulls and sample sizes for assistance.</p>
+</div></blockquote>
 <div class="toctree-wrapper compound">
+</div>
 </div>
 </div>
 
