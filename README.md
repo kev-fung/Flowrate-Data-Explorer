@@ -15,7 +15,7 @@ One of the main problems encountered in industry is data integration for machine
 For a fuller explanation of how to use the software: **check inside the mlflowrate folder!!**
 
 Feature documentation can be found here:  
-https://kkf18.github.io/acse-9-independent-research-project-kkf18/
+https://kev-fung.github.io/mlflowrate/
 
 ## Requirements
 mlflowrate is intentionally built for the Azure DataBricks Notebooks. However, users may also run it locally on a Jupyter Notebook if PySpark has been installed!
