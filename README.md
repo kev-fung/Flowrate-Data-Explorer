@@ -12,13 +12,13 @@ ACSE 9: Independent Research Project
 One of the main problems encountered in industry is data integration for machine learning applications. The developed package has been designed to integrate common well data into clean, consistent Spark or Pandas DataFrames for machine learning. The exploratory module features are currently tailored for Scale Detection for North Sea Oil Wells, more information can be found in the IRP presentation and report in the docs.
 
 ## Documentation
-For a fuller explanation of how to use the software: **check inside the mlflowrate folder!!**
+For a fuller explanation of how to use the software: **look inside the mlflowrate folder**
 
 Feature documentation can be found here:  
 https://kev-fung.github.io/mlflowrate/
 
 ## Requirements
-mlflowrate is intentionally built for the Azure DataBricks Notebooks. However, users may also run it locally on a Jupyter Notebook if PySpark has been installed!
+mlflowrate has been intentionally built for Azure DataBricks Notebooks. However, users may also run it locally on a Jupyter Notebook if PySpark has been installed.
 
 ## Installation
 https://pypi.org/project/mlflowrate/
