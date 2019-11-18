@@ -1,7 +1,7 @@
 # mlflowrate: Data exploration package for North Sea well data.
-**MSc Applied Computational Science and Engineering**, ACSE 9: Independent Research Project
-- CID: 01098510
-- Email: kevin.fung18@imperial.ac.uk
+**MSc Applied Computational Science and Engineering**: Independent Research Project
+
+Email: kevin.fung18@imperial.ac.uk   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    CID: 01098510
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
@@ -20,11 +20,11 @@ The exploratory features are currently tailored for scale detection, more inform
 * Python
 
 ## Installation
-https://pypi.org/project/mlflowrate/
+Package can be installed via pip:
+    pip install mlflowrate
 
 Current Version: 0.0.1
-
-    pip install mlflowrate
+https://pypi.org/project/mlflowrate/
 
 ## License
 MIT License
