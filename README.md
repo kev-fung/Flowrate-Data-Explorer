@@ -10,7 +10,7 @@ One of the main problems encountered in industry is data integration for machine
 
 The exploratory features are currently tailored for scale detection, more information can be found in the [IRP presentation](https://github.com/kev-fung/Flowrate-Data-Explorer/blob/master/docs/IRP_presentation_slides.pptx).
 
-Code developed under Wintershall Dea.
+Developed under [Wintershall Dea](https://wintershalldea.com/en).
 
 ## Documentation
 * [Software Explanation](https://github.com/kev-fung/Flowrate-Data-Explorer/tree/master/mlflowrate)
