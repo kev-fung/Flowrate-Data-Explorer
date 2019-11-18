@@ -5,6 +5,8 @@
 
 Email: kevin.fung18@imperial.ac.uk  
 
+CID: 01098510
+
 ## Description
 One of the main problems encountered in industry is data integration for machine learning applications. The developed package is designed to integrate common well data into clean, consistent Spark or Pandas DataFrames for machine learning. 
 
