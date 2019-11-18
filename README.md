@@ -5,14 +5,10 @@
 
 Email: kevin.fung18@imperial.ac.uk  
 
-CID: 01098510
-
 ## Description
 One of the main problems encountered in industry is data integration for machine learning applications. The developed package is designed to integrate common well data into clean, consistent Spark or Pandas DataFrames for machine learning. 
 
 The exploratory features are currently tailored for scale detection, more information can be found in the [IRP presentation](https://github.com/kev-fung/Flowrate-Data-Explorer/blob/master/IRP_presentation.pdf).
-
-Developed under [Wintershall Dea](https://wintershalldea.com/en).
 
 ## Documentation
 * [Software Explanation](https://github.com/kev-fung/Flowrate-Data-Explorer/tree/master/mlflowrate)
@@ -33,3 +29,5 @@ https://pypi.org/project/mlflowrate/
 
 ## License
 MIT License
+
+Developed under [Wintershall Dea](https://wintershalldea.com/en).
