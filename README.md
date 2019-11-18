@@ -1,11 +1,9 @@
 # mlflowrate: Data exploration package for North Sea well data.
-**MSc Applied Computational Science and Engineering**
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Independent Research Project
+**MSc Applied Computational Science and Engineering** - Independent Research Project
 
 Email: kevin.fung18@imperial.ac.uk  
-
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Description
 One of the main problems encountered in industry is data integration for machine learning applications. The developed package is designed to integrate common well data into clean, consistent Spark or Pandas DataFrames for machine learning. 
