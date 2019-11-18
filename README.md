@@ -1,4 +1,4 @@
-# mlflowrate: Data exploration package for North Sea well data.
+# mlflowrate: Data exploration for North Sea well data.
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 **MSc Applied Computational Science and Engineering** - Independent Research Project
