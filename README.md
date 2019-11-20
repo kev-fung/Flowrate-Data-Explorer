@@ -12,7 +12,7 @@ The exploratory features are currently tailored for scale detection, more inform
 
 ## Documentation
 * [Software Explanation](https://github.com/kev-fung/Flowrate-Data-Explorer/tree/master/mlflowrate)
-* [Feature Documentation](https://kev-fung.github.io/Flowrate-Data-Explorer/)
+* [Sphynx Feature Documentation](https://kev-fung.github.io/Flowrate-Data-Explorer/)
 
 ## Requirements
 * Azure DataBricks Notebooks
